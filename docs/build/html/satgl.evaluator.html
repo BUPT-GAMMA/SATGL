@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+
+<html lang="python" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>satgl.evaluator package &#8212; SATGL  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css?v=87629129" />
+    <script src="_static/documentation_options.js?v=d048f138"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SATGL  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">satgl.evaluator package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="satgl-evaluator-package">
+<h1>satgl.evaluator package<a class="headerlink" href="#satgl-evaluator-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-satgl.evaluator.evaluator">
+<span id="satgl-evaluator-evaluator-module"></span><h2>satgl.evaluator.evaluator module<a class="headerlink" href="#module-satgl.evaluator.evaluator" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="satgl.evaluator.evaluator.Accuracy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">satgl.evaluator.evaluator.</span></span><span class="sig-name descname"><span class="pre">Accuracy</span></span><a class="reference internal" href="_modules/satgl/evaluator/evaluator.html#Accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.evaluator.Accuracy" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#satgl.evaluator.evaluator.Evaluator" title="satgl.evaluator.evaluator.Evaluator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Evaluator</span></code></a></p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(pred, label)</p></td>
+<td><p>Call self as a function.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>better</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>reset</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>update</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.evaluator.evaluator.Accuracy.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/evaluator/evaluator.html#Accuracy.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.evaluator.Accuracy.reset" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="satgl.evaluator.evaluator.Evaluator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">satgl.evaluator.evaluator.</span></span><span class="sig-name descname"><span class="pre">Evaluator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eval_fn</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_fn_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compare_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/evaluator/evaluator.html#Evaluator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.evaluator.Evaluator" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(pred, label)</p></td>
+<td><p>Call self as a function.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>better</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>reset</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>update</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.evaluator.evaluator.Evaluator.better">
+<span class="sig-name descname"><span class="pre">better</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other_evaluator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/evaluator/evaluator.html#Evaluator.better"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.evaluator.Evaluator.better" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.evaluator.evaluator.Evaluator.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/evaluator/evaluator.html#Evaluator.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.evaluator.Evaluator.reset" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.evaluator.evaluator.Evaluator.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other_evaluator</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/evaluator/evaluator.html#Evaluator.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.evaluator.Evaluator.update" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="satgl.evaluator.evaluator.EvaluatorManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">satgl.evaluator.evaluator.</span></span><span class="sig-name descname"><span class="pre">EvaluatorManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eval_metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/evaluator/evaluator.html#EvaluatorManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.evaluator.EvaluatorManager" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#satgl.evaluator.evaluator.EvaluatorManager.add_evaluator" title="satgl.evaluator.evaluator.EvaluatorManager.add_evaluator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_evaluator</span></code></a>(eval_metric)</p></td>
+<td><p>Add evaluator for the given metric.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#satgl.evaluator.evaluator.EvaluatorManager.get_eval_results" title="satgl.evaluator.evaluator.EvaluatorManager.get_eval_results"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_eval_results</span></code></a>()</p></td>
+<td><p>Get the evaluation results.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#satgl.evaluator.evaluator.EvaluatorManager.reset" title="satgl.evaluator.evaluator.EvaluatorManager.reset"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reset</span></code></a>()</p></td>
+<td><p>Reset the evaluators.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#satgl.evaluator.evaluator.EvaluatorManager.update_evaluators" title="satgl.evaluator.evaluator.EvaluatorManager.update_evaluators"><code class="xref py py-obj docutils literal notranslate"><span class="pre">update_evaluators</span></code></a>(pred, label)</p></td>
+<td><p>Update the evaluators with the given prediction and label.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.evaluator.evaluator.EvaluatorManager.add_evaluator">
+<span class="sig-name descname"><span class="pre">add_evaluator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">eval_metric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/evaluator/evaluator.html#EvaluatorManager.add_evaluator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.evaluator.EvaluatorManager.add_evaluator" title="Link to this definition">¶</a></dt>
+<dd><p>Add evaluator for the given metric.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>eval_metric</strong><span class="classifier">str</span></dt><dd><p>The evaluation metric.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.evaluator.evaluator.EvaluatorManager.get_eval_results">
+<span class="sig-name descname"><span class="pre">get_eval_results</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/evaluator/evaluator.html#EvaluatorManager.get_eval_results"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.evaluator.EvaluatorManager.get_eval_results" title="Link to this definition">¶</a></dt>
+<dd><p>Get the evaluation results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>dict</dt><dd><p>The evaluation results.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.evaluator.evaluator.EvaluatorManager.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/evaluator/evaluator.html#EvaluatorManager.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.evaluator.EvaluatorManager.reset" title="Link to this definition">¶</a></dt>
+<dd><p>Reset the evaluators.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.evaluator.evaluator.EvaluatorManager.update_evaluators">
+<span class="sig-name descname"><span class="pre">update_evaluators</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/evaluator/evaluator.html#EvaluatorManager.update_evaluators"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.evaluator.EvaluatorManager.update_evaluators" title="Link to this definition">¶</a></dt>
+<dd><p>Update the evaluators with the given prediction and label.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pred</strong><span class="classifier">torch.Tensor</span></dt><dd><p>The model's prediction.</p>
+</dd>
+<dt><strong>label</strong><span class="classifier">torch.Tensor</span></dt><dd><p>The true label.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="satgl.evaluator.evaluator.MicroF1">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">satgl.evaluator.evaluator.</span></span><span class="sig-name descname"><span class="pre">MicroF1</span></span><a class="reference internal" href="_modules/satgl/evaluator/evaluator.html#MicroF1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.evaluator.MicroF1" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#satgl.evaluator.evaluator.Evaluator" title="satgl.evaluator.evaluator.Evaluator"><code class="xref py py-class docutils literal notranslate"><span class="pre">Evaluator</span></code></a></p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(pred, label)</p></td>
+<td><p>Call self as a function.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>better</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>reset</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>update</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.evaluator.evaluator.MicroF1.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/evaluator/evaluator.html#MicroF1.reset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.evaluator.MicroF1.reset" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="satgl.evaluator.evaluator.accuracy">
+<span class="sig-prename descclassname"><span class="pre">satgl.evaluator.evaluator.</span></span><span class="sig-name descname"><span class="pre">accuracy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/satgl/evaluator/evaluator.html#accuracy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.evaluator.accuracy" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate the accuracy of the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pred</strong><span class="classifier">torch.Tensor</span></dt><dd><p>The model's prediction.</p>
+</dd>
+<dt><strong>label</strong><span class="classifier">torch.Tensor</span></dt><dd><p>The true label.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="satgl.evaluator.evaluator.micro_f1">
+<span class="sig-prename descclassname"><span class="pre">satgl.evaluator.evaluator.</span></span><span class="sig-name descname"><span class="pre">micro_f1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_detail</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/satgl/evaluator/evaluator.html#micro_f1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.evaluator.micro_f1" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate the F1 score of the model. If return_detail is True, also return the tp, fp, tn, fp</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>pred</strong><span class="classifier">torch.Tensor</span></dt><dd><p>The model's prediction.</p>
+</dd>
+<dt><strong>label</strong><span class="classifier">torch.Tensor</span></dt><dd><p>The true label.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-satgl.evaluator.sls_solver">
+<span id="satgl-evaluator-sls-solver-module"></span><h2>satgl.evaluator.sls_solver module<a class="headerlink" href="#module-satgl.evaluator.sls_solver" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="satgl.evaluator.sls_solver.parse_sls_solver_output">
+<span class="sig-prename descclassname"><span class="pre">satgl.evaluator.sls_solver.</span></span><span class="sig-name descname"><span class="pre">parse_sls_solver_output</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/evaluator/sls_solver.html#parse_sls_solver_output"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.sls_solver.parse_sls_solver_output" title="Link to this definition">¶</a></dt>
+<dd><p>Parse the output of the sls solver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>file_path</strong><span class="classifier">str</span></dt><dd><p>The file path of the output file.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>The parsed output.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="satgl.evaluator.sls_solver.run_sls_solver">
+<span class="sig-prename descclassname"><span class="pre">satgl.evaluator.sls_solver.</span></span><span class="sig-name descname"><span class="pre">run_sls_solver</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solver_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cnf_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_vars_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_limit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/evaluator/sls_solver.html#run_sls_solver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.evaluator.sls_solver.run_sls_solver" title="Link to this definition">¶</a></dt>
+<dd><p>Run the sls solver.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>solver_name</strong><span class="classifier">str</span></dt><dd><p>The name of the solver.</p>
+</dd>
+<dt><strong>cnf_path</strong><span class="classifier">str</span></dt><dd><p>The file path of the CNF file.</p>
+</dd>
+<dt><strong>init_vars_path</strong><span class="classifier">str</span></dt><dd><p>The file path of the initial variables.</p>
+</dd>
+<dt><strong>time_limit</strong><span class="classifier">int</span></dt><dd><p>The time limit in seconds.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-satgl.evaluator">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-satgl.evaluator" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">satgl.evaluator package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-satgl.evaluator.evaluator">satgl.evaluator.evaluator module</a><ul>
+<li><a class="reference internal" href="#satgl.evaluator.evaluator.Accuracy"><code class="docutils literal notranslate"><span class="pre">Accuracy</span></code></a><ul>
+<li><a class="reference internal" href="#satgl.evaluator.evaluator.Accuracy.reset"><code class="docutils literal notranslate"><span class="pre">Accuracy.reset()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#satgl.evaluator.evaluator.Evaluator"><code class="docutils literal notranslate"><span class="pre">Evaluator</span></code></a><ul>
+<li><a class="reference internal" href="#satgl.evaluator.evaluator.Evaluator.better"><code class="docutils literal notranslate"><span class="pre">Evaluator.better()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.evaluator.evaluator.Evaluator.reset"><code class="docutils literal notranslate"><span class="pre">Evaluator.reset()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.evaluator.evaluator.Evaluator.update"><code class="docutils literal notranslate"><span class="pre">Evaluator.update()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#satgl.evaluator.evaluator.EvaluatorManager"><code class="docutils literal notranslate"><span class="pre">EvaluatorManager</span></code></a><ul>
+<li><a class="reference internal" href="#satgl.evaluator.evaluator.EvaluatorManager.add_evaluator"><code class="docutils literal notranslate"><span class="pre">EvaluatorManager.add_evaluator()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.evaluator.evaluator.EvaluatorManager.get_eval_results"><code class="docutils literal notranslate"><span class="pre">EvaluatorManager.get_eval_results()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.evaluator.evaluator.EvaluatorManager.reset"><code class="docutils literal notranslate"><span class="pre">EvaluatorManager.reset()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.evaluator.evaluator.EvaluatorManager.update_evaluators"><code class="docutils literal notranslate"><span class="pre">EvaluatorManager.update_evaluators()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#satgl.evaluator.evaluator.MicroF1"><code class="docutils literal notranslate"><span class="pre">MicroF1</span></code></a><ul>
+<li><a class="reference internal" href="#satgl.evaluator.evaluator.MicroF1.reset"><code class="docutils literal notranslate"><span class="pre">MicroF1.reset()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#satgl.evaluator.evaluator.accuracy"><code class="docutils literal notranslate"><span class="pre">accuracy()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.evaluator.evaluator.micro_f1"><code class="docutils literal notranslate"><span class="pre">micro_f1()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-satgl.evaluator.sls_solver">satgl.evaluator.sls_solver module</a><ul>
+<li><a class="reference internal" href="#satgl.evaluator.sls_solver.parse_sls_solver_output"><code class="docutils literal notranslate"><span class="pre">parse_sls_solver_output()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.evaluator.sls_solver.run_sls_solver"><code class="docutils literal notranslate"><span class="pre">run_sls_solver()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-satgl.evaluator">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/satgl.evaluator.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SATGL  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">satgl.evaluator package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Clinozoisite.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+  </body>
+</html>

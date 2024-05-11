@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+
+<html lang="python" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>satgl.wrappers.data_wrappers package &#8212; SATGL  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css?v=87629129" />
+    <script src="_static/documentation_options.js?v=d048f138"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SATGL  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">satgl.wrappers.data_wrappers package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="satgl-wrappers-data-wrappers-package">
+<h1>satgl.wrappers.data_wrappers package<a class="headerlink" href="#satgl-wrappers-data-wrappers-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-satgl.wrappers.data_wrappers.base_data_wrapper">
+<span id="satgl-wrappers-data-wrappers-base-data-wrapper-module"></span><h2>satgl.wrappers.data_wrappers.base_data_wrapper module<a class="headerlink" href="#module-satgl.wrappers.data_wrappers.base_data_wrapper" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="satgl.wrappers.data_wrappers.base_data_wrapper.DataWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">satgl.wrappers.data_wrappers.base_data_wrapper.</span></span><span class="sig-name descname"><span class="pre">DataWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/data_wrappers/base_data_wrapper.html#DataWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.data_wrappers.base_data_wrapper.DataWrapper" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>get_dataloader</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>get_dataset</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>process</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.data_wrappers.base_data_wrapper.DataWrapper.get_dataloader">
+<span class="sig-name descname"><span class="pre">get_dataloader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/data_wrappers/base_data_wrapper.html#DataWrapper.get_dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.data_wrappers.base_data_wrapper.DataWrapper.get_dataloader" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.data_wrappers.base_data_wrapper.DataWrapper.get_dataset">
+<span class="sig-name descname"><span class="pre">get_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/data_wrappers/base_data_wrapper.html#DataWrapper.get_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.data_wrappers.base_data_wrapper.DataWrapper.get_dataset" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.data_wrappers.base_data_wrapper.DataWrapper.process">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/data_wrappers/base_data_wrapper.html#DataWrapper.process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.data_wrappers.base_data_wrapper.DataWrapper.process" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-satgl.wrappers.data_wrappers.cnf_data_wrappers">
+<span id="satgl-wrappers-data-wrappers-cnf-data-wrappers-module"></span><h2>satgl.wrappers.data_wrappers.cnf_data_wrappers module<a class="headerlink" href="#module-satgl.wrappers.data_wrappers.cnf_data_wrappers" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="satgl.wrappers.data_wrappers.cnf_data_wrappers.CNFDataWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">satgl.wrappers.data_wrappers.cnf_data_wrappers.</span></span><span class="sig-name descname"><span class="pre">CNFDataWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">root_dir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">task</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graph_type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/data_wrappers/cnf_data_wrappers.html#CNFDataWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.data_wrappers.cnf_data_wrappers.CNFDataWrapper" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#satgl.wrappers.data_wrappers.base_data_wrapper.DataWrapper" title="satgl.wrappers.data_wrappers.base_data_wrapper.DataWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataWrapper</span></code></a></p>
+<p class="rubric">Methods</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>get_dataloader</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>get_dataset</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>process</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.data_wrappers.cnf_data_wrappers.CNFDataWrapper.get_dataloader">
+<span class="sig-name descname"><span class="pre">get_dataloader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shuffle</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/data_wrappers/cnf_data_wrappers.html#CNFDataWrapper.get_dataloader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.data_wrappers.cnf_data_wrappers.CNFDataWrapper.get_dataloader" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.data_wrappers.cnf_data_wrappers.CNFDataWrapper.get_dataset">
+<span class="sig-name descname"><span class="pre">get_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/data_wrappers/cnf_data_wrappers.html#CNFDataWrapper.get_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.data_wrappers.cnf_data_wrappers.CNFDataWrapper.get_dataset" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-satgl.wrappers.data_wrappers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-satgl.wrappers.data_wrappers" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">satgl.wrappers.data_wrappers package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-satgl.wrappers.data_wrappers.base_data_wrapper">satgl.wrappers.data_wrappers.base_data_wrapper module</a><ul>
+<li><a class="reference internal" href="#satgl.wrappers.data_wrappers.base_data_wrapper.DataWrapper"><code class="docutils literal notranslate"><span class="pre">DataWrapper</span></code></a><ul>
+<li><a class="reference internal" href="#satgl.wrappers.data_wrappers.base_data_wrapper.DataWrapper.get_dataloader"><code class="docutils literal notranslate"><span class="pre">DataWrapper.get_dataloader()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.data_wrappers.base_data_wrapper.DataWrapper.get_dataset"><code class="docutils literal notranslate"><span class="pre">DataWrapper.get_dataset()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.data_wrappers.base_data_wrapper.DataWrapper.process"><code class="docutils literal notranslate"><span class="pre">DataWrapper.process()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-satgl.wrappers.data_wrappers.cnf_data_wrappers">satgl.wrappers.data_wrappers.cnf_data_wrappers module</a><ul>
+<li><a class="reference internal" href="#satgl.wrappers.data_wrappers.cnf_data_wrappers.CNFDataWrapper"><code class="docutils literal notranslate"><span class="pre">CNFDataWrapper</span></code></a><ul>
+<li><a class="reference internal" href="#satgl.wrappers.data_wrappers.cnf_data_wrappers.CNFDataWrapper.get_dataloader"><code class="docutils literal notranslate"><span class="pre">CNFDataWrapper.get_dataloader()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.data_wrappers.cnf_data_wrappers.CNFDataWrapper.get_dataset"><code class="docutils literal notranslate"><span class="pre">CNFDataWrapper.get_dataset()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-satgl.wrappers.data_wrappers">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/satgl.wrappers.data_wrappers.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SATGL  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">satgl.wrappers.data_wrappers package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Clinozoisite.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+  </body>
+</html>

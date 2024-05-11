@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+
+<html lang="python" data-content_root="../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>satgl.evaluator.evaluator &#8212; SATGL  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../../_static/documentation_options.js?v=d048f138"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for satgl.evaluator.evaluator</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">torch</span>
+
+<div class="viewcode-block" id="accuracy">
+<a class="viewcode-back" href="../../../satgl.evaluator.html#satgl.evaluator.evaluator.accuracy">[docs]</a>
+<span class="k">def</span> <span class="nf">accuracy</span><span class="p">(</span><span class="n">pred</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the accuracy of the model.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pred : torch.Tensor</span>
+<span class="sd">        The model&#39;s prediction.</span>
+<span class="sd">    label : torch.Tensor</span>
+<span class="sd">        The true label.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">pred</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">pred</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+    <span class="n">correct</span> <span class="o">=</span> <span class="n">pred</span><span class="o">.</span><span class="n">eq</span><span class="p">(</span><span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">correct</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">label</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="micro_f1">
+<a class="viewcode-back" href="../../../satgl.evaluator.html#satgl.evaluator.evaluator.micro_f1">[docs]</a>
+<span class="k">def</span> <span class="nf">micro_f1</span><span class="p">(</span><span class="n">pred</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">return_detail</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">    </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculate the F1 score of the model. If return_detail is True, also return the tp, fp, tn, fp</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pred : torch.Tensor</span>
+<span class="sd">        The model&#39;s prediction.</span>
+<span class="sd">    label : torch.Tensor</span>
+<span class="sd">        The true label.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">pred</span><span class="o">.</span><span class="n">dim</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">pred</span> <span class="o">&gt;</span> <span class="mf">0.5</span>
+
+    <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">.</span><span class="n">bool</span><span class="p">()</span>
+    <span class="n">tp</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred</span> <span class="o">&amp;</span> <span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="p">(</span><span class="n">pred</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">pred</span> <span class="o">&amp;</span> <span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+    <span class="n">tn</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">pred</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">label</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+    <span class="n">precision</span> <span class="o">=</span> <span class="n">tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fp</span><span class="p">)</span> <span class="k">if</span> <span class="n">tp</span> <span class="o">+</span> <span class="n">fp</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="n">recall</span> <span class="o">=</span> <span class="n">tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">tp</span> <span class="o">+</span> <span class="n">fn</span><span class="p">)</span> <span class="k">if</span> <span class="n">tp</span> <span class="o">+</span> <span class="n">fn</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="n">tp</span> <span class="o">=</span> <span class="n">tp</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">fp</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">tn</span> <span class="o">=</span> <span class="n">tn</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+    <span class="n">fn</span> <span class="o">=</span> <span class="n">fn</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+    <span class="n">f1</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">precision</span> <span class="o">*</span> <span class="n">recall</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">precision</span> <span class="o">+</span> <span class="n">recall</span><span class="p">)</span> <span class="k">if</span> <span class="n">precision</span> <span class="o">+</span> <span class="n">recall</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="k">if</span> <span class="n">return_detail</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f1</span><span class="p">,</span> <span class="n">tp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">fn</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">f1</span></div>
+
+
+
+<div class="viewcode-block" id="Evaluator">
+<a class="viewcode-back" href="../../../satgl.evaluator.html#satgl.evaluator.evaluator.Evaluator">[docs]</a>
+<span class="k">class</span> <span class="nc">Evaluator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">eval_fn</span><span class="p">:</span> <span class="nb">callable</span><span class="p">,</span>
+            <span class="n">eval_fn_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">compare_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Evaluator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval_fn</span> <span class="o">=</span> <span class="n">eval_fn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval_fn_name</span> <span class="o">=</span> <span class="n">eval_fn_name</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">compare_type</span> <span class="o">=</span> <span class="n">compare_type</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    
+<div class="viewcode-block" id="Evaluator.better">
+<a class="viewcode-back" href="../../../satgl.evaluator.html#satgl.evaluator.evaluator.Evaluator.better">[docs]</a>
+    <span class="k">def</span> <span class="nf">better</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_evaluator</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">compare_type</span> <span class="o">==</span> <span class="s2">&quot;&gt;&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">eval_fn_name</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">other_evaluator</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">eval_fn_name</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">eval_fn_name</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">other_evaluator</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">eval_fn_name</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="Evaluator.reset">
+<a class="viewcode-back" href="../../../satgl.evaluator.html#satgl.evaluator.evaluator.Evaluator.reset">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;reset method not implemented&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Evaluator.update">
+<a class="viewcode-back" href="../../../satgl.evaluator.html#satgl.evaluator.evaluator.Evaluator.update">[docs]</a>
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other_evaluator</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;update method not implemented&quot;</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span></div>
+
+    
+
+<div class="viewcode-block" id="Accuracy">
+<a class="viewcode-back" href="../../../satgl.evaluator.html#satgl.evaluator.evaluator.Accuracy">[docs]</a>
+<span class="k">class</span> <span class="nc">Accuracy</span><span class="p">(</span><span class="n">Evaluator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Accuracy</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">eval_fn</span><span class="o">=</span><span class="n">accuracy</span><span class="p">,</span>
+            <span class="n">eval_fn_name</span><span class="o">=</span><span class="s2">&quot;accuracy&quot;</span><span class="p">,</span>
+            <span class="n">compare_type</span><span class="o">=</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+    
+<div class="viewcode-block" id="Accuracy.reset">
+<a class="viewcode-back" href="../../../satgl.evaluator.html#satgl.evaluator.evaluator.Accuracy.reset">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;data_size&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;accuracy&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span></div>
+
+    
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+        <span class="n">acc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+        <span class="n">data_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+        <span class="n">cur_acc_sum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;data_size&quot;</span><span class="p">]</span>
+        
+        <span class="n">new_acc_sum</span> <span class="o">=</span> <span class="n">acc</span> <span class="o">*</span> <span class="n">data_size</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;data_size&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">data_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;accuracy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">cur_acc_sum</span> <span class="o">+</span> <span class="n">new_acc_sum</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;data_size&quot;</span><span class="p">]</span></div>
+
+
+
+<div class="viewcode-block" id="MicroF1">
+<a class="viewcode-back" href="../../../satgl.evaluator.html#satgl.evaluator.evaluator.MicroF1">[docs]</a>
+<span class="k">class</span> <span class="nc">MicroF1</span><span class="p">(</span><span class="n">Evaluator</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MicroF1</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">eval_fn</span><span class="o">=</span><span class="n">micro_f1</span><span class="p">,</span>
+            <span class="n">eval_fn_name</span><span class="o">=</span><span class="s2">&quot;micro_f1&quot;</span><span class="p">,</span>
+            <span class="n">compare_type</span><span class="o">=</span><span class="s2">&quot;&gt;&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="MicroF1.reset">
+<a class="viewcode-back" href="../../../satgl.evaluator.html#satgl.evaluator.evaluator.MicroF1.reset">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;data_size&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;tp&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;fp&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;tn&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;fn&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">&quot;micro_f1&quot;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+        <span class="n">f1</span><span class="p">,</span> <span class="n">tp</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">tn</span><span class="p">,</span> <span class="n">fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span>
+        <span class="n">data_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+        <span class="n">cur_tp_sum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;tp&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;data_size&quot;</span><span class="p">]</span>
+        <span class="n">cur_fp_sum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;fp&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;data_size&quot;</span><span class="p">]</span>
+        <span class="n">cur_tn_sum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;tn&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;data_size&quot;</span><span class="p">]</span>
+        <span class="n">cur_fn_sum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;fn&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;data_size&quot;</span><span class="p">]</span>
+        <span class="n">cur_f1_sum</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;micro_f1&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;data_size&quot;</span><span class="p">]</span>
+
+        <span class="n">new_tp_sum</span> <span class="o">=</span> <span class="n">tp</span> <span class="o">*</span> <span class="n">data_size</span>
+        <span class="n">new_fp_sum</span> <span class="o">=</span> <span class="n">fp</span> <span class="o">*</span> <span class="n">data_size</span>
+        <span class="n">new_tn_sum</span> <span class="o">=</span> <span class="n">tn</span> <span class="o">*</span> <span class="n">data_size</span>
+        <span class="n">new_fn_sum</span> <span class="o">=</span> <span class="n">fn</span> <span class="o">*</span> <span class="n">data_size</span>
+        <span class="n">new_f1_sum</span> <span class="o">=</span> <span class="n">f1</span> <span class="o">*</span> <span class="n">data_size</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;data_size&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">data_size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;tp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">cur_tp_sum</span> <span class="o">+</span> <span class="n">new_tp_sum</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;data_size&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;fp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">cur_fp_sum</span> <span class="o">+</span> <span class="n">new_fp_sum</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;data_size&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;tn&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">cur_tn_sum</span> <span class="o">+</span> <span class="n">new_tn_sum</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;data_size&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;fn&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">cur_fn_sum</span> <span class="o">+</span> <span class="n">new_fn_sum</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;data_size&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;micro_f1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">cur_f1_sum</span> <span class="o">+</span> <span class="n">new_f1_sum</span><span class="p">)</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_status</span><span class="p">[</span><span class="s2">&quot;data_size&quot;</span><span class="p">]</span></div>
+
+
+
+<span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">dict to store the evaluator for each metric</span>
+
+<span class="sd">format: </span>
+<span class="sd">    &quot;metric_name&quot;: Evaluator</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">evaluator_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;accuracy&quot;</span><span class="p">:</span> <span class="n">Accuracy</span><span class="p">,</span>
+    <span class="s2">&quot;micro_f1&quot;</span><span class="p">:</span> <span class="n">MicroF1</span>
+<span class="p">}</span>
+
+<span class="c1"># def find_evaluator(eval_metric: &quot;str&quot;) -&gt; Evaluator:</span>
+<span class="c1">#     r&quot;&quot;&quot;</span>
+<span class="c1">#     Find the evaluator for the given metric.</span>
+
+<span class="c1">#     Parameters</span>
+<span class="c1">#     ----------</span>
+<span class="c1">#     eval_metric : str</span>
+<span class="c1">#         The evaluation metric.</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     if eval_metric not in evaluator_dict:</span>
+<span class="c1">#         raise ValueError(f&quot;evaluator for {eval_metric} not found&quot;)</span>
+<span class="c1">#     return evaluator_dict[eval_metric]</span>
+
+
+<span class="c1"># def get_all_evaluator(eval_metrics: list) -&gt; dict:</span>
+<span class="c1">#     r&quot;&quot;&quot;</span>
+<span class="c1">#     Get evaluator for each metric.</span>
+
+<span class="c1">#     Parameters</span>
+<span class="c1">#     ----------</span>
+<span class="c1">#     eval_metrics : list</span>
+<span class="c1">#         The list of evaluation metrics.</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     evaluator_dict = {}</span>
+<span class="c1">#     for metric in eval_metrics:</span>
+<span class="c1">#         evaluator_dict[metric] = evaluator_dict[metric]</span>
+<span class="c1">#     return evaluator_dict</span>
+    
+<div class="viewcode-block" id="EvaluatorManager">
+<a class="viewcode-back" href="../../../satgl.evaluator.html#satgl.evaluator.evaluator.EvaluatorManager">[docs]</a>
+<span class="k">class</span> <span class="nc">EvaluatorManager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eval_metrics</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eval_metrics</span> <span class="o">=</span> <span class="n">eval_metrics</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evaluators</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">eval_metrics</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_evaluator</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
+
+    
+<div class="viewcode-block" id="EvaluatorManager.add_evaluator">
+<a class="viewcode-back" href="../../../satgl.evaluator.html#satgl.evaluator.evaluator.EvaluatorManager.add_evaluator">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_evaluator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">eval_metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Add evaluator for the given metric.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        eval_metric : str</span>
+<span class="sd">            The evaluation metric.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">eval_metric</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">evaluator_dict</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;evaluator for </span><span class="si">{</span><span class="n">eval_metric</span><span class="si">}</span><span class="s2"> not found&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evaluators</span><span class="p">[</span><span class="n">eval_metric</span><span class="p">]</span> <span class="o">=</span> <span class="n">evaluator_dict</span><span class="p">[</span><span class="n">eval_metric</span><span class="p">]()</span></div>
+
+    
+<div class="viewcode-block" id="EvaluatorManager.update_evaluators">
+<a class="viewcode-back" href="../../../satgl.evaluator.html#satgl.evaluator.evaluator.EvaluatorManager.update_evaluators">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_evaluators</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the evaluators with the given prediction and label.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        pred : torch.Tensor</span>
+<span class="sd">            The model&#39;s prediction.</span>
+<span class="sd">        label : torch.Tensor</span>
+<span class="sd">            The true label.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">evaluator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluators</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">evaluator</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">label</span><span class="p">)</span></div>
+
+    
+<div class="viewcode-block" id="EvaluatorManager.get_eval_results">
+<a class="viewcode-back" href="../../../satgl.evaluator.html#satgl.evaluator.evaluator.EvaluatorManager.get_eval_results">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_eval_results</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Get the evaluation results.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        dict</span>
+<span class="sd">            The evaluation results.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">evaluator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluators</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">evaluator</span><span class="o">.</span><span class="n">eval_status</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span></div>
+
+
+<div class="viewcode-block" id="EvaluatorManager.reset">
+<a class="viewcode-back" href="../../../satgl.evaluator.html#satgl.evaluator.evaluator.EvaluatorManager.reset">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reset the evaluators.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">evaluator</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluators</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">evaluator</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span></div>
+
+    
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluators</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evaluators</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+    
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">evaluators</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">evaluators</span><span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">SATGL</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Clinozoisite.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

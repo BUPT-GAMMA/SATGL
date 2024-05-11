@@ -1,0 +1,29 @@
+dataset_name: default_dataset
+graph_type: lcg
+feature_type: node_type
+batch_size: 16
+
+# device
+device: cuda
+
+# train settings
+lr: 0.0001
+weight_decay: 0.9
+epochs: 100
+optimizer: adam
+eval_step: 1
+eval_metric: ["acc"]
+valid_metric: loss
+early_stopping: False
+batch_size: 16
+save_model: False
+tensorboard_dir: ./tensorboard_run
+scheduler_settings: False
+
+
+# dataset settings
+load_split_dataset: False
+split_ratio: [0.8, 0.2, 0.0]
+
+#log settings
+log_file: False

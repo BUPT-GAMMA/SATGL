@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+
+<html lang="python" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>satgl.wrappers.model_wrappers package &#8212; SATGL  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css?v=87629129" />
+    <script src="_static/documentation_options.js?v=d048f138"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SATGL  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">satgl.wrappers.model_wrappers package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="satgl-wrappers-model-wrappers-package">
+<h1>satgl.wrappers.model_wrappers package<a class="headerlink" href="#satgl-wrappers-model-wrappers-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-satgl.wrappers.model_wrappers.base_model_wrapper">
+<span id="satgl-wrappers-model-wrappers-base-model-wrapper-module"></span><h2>satgl.wrappers.model_wrappers.base_model_wrapper module<a class="headerlink" href="#module-satgl.wrappers.model_wrappers.base_model_wrapper" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">satgl.wrappers.model_wrappers.base_model_wrapper.</span></span><span class="sig-name descname"><span class="pre">ModelWrapper</span></span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/base_model_wrapper.html#ModelWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>evaluator</strong></dt><dd></dd>
+<dt><strong>loss</strong></dt><dd></dd>
+<dt><strong>model</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_module</span></code>(name, module)</p></td>
+<td><p>Adds a child module to the current module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code>(fn)</p></td>
+<td><p>Applies <code class="docutils literal notranslate"><span class="pre">fn</span></code> recursively to every submodule (as returned by <code class="docutils literal notranslate"><span class="pre">.children()</span></code>) as well as self.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bfloat16</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">bfloat16</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">buffers</span></code>([recurse])</p></td>
+<td><p>Returns an iterator over module buffers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code>()</p></td>
+<td><p>Returns an iterator over immediate children modules.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cpu</span></code>()</p></td>
+<td><p>Moves all model parameters and buffers to the CPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cuda</span></code>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the GPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">double</span></code> datatype.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code>()</p></td>
+<td><p>Sets the module in evaluation mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">extra_repr</span></code>()</p></td>
+<td><p>Set the extra representation of the module</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">float</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.forward" title="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.forward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code></a>(batch)</p></td>
+<td><p>Defines the computation performed at every call.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_buffer</span></code>(target)</p></td>
+<td><p>Returns the buffer given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_extra_state</span></code>()</p></td>
+<td><p>Returns any extra state to include in the module's state_dict.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parameter</span></code>(target)</p></td>
+<td><p>Returns the parameter given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_submodule</span></code>(target)</p></td>
+<td><p>Returns the submodule given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">half</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">half</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipu</span></code>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the IPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_state_dict</span></code>(state_dict[, strict])</p></td>
+<td><p>Copies parameters and buffers from <code class="xref py py-attr docutils literal notranslate"><span class="pre">state_dict</span></code> into this module and its descendants.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code>()</p></td>
+<td><p>Returns an iterator over all modules in the network.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_buffers</span></code>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module buffers, yielding both the name of the buffer as well as the buffer itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_children</span></code>()</p></td>
+<td><p>Returns an iterator over immediate children modules, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_modules</span></code>([memo, prefix, remove_duplicate])</p></td>
+<td><p>Returns an iterator over all modules in the network, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_parameters</span></code>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module parameters, yielding both the name of the parameter as well as the parameter itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">parameters</span></code>([recurse])</p></td>
+<td><p>Returns an iterator over module parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_backward_hook</span></code>(hook)</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_buffer</span></code>(name, tensor[, persistent])</p></td>
+<td><p>Adds a buffer to the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_hook</span></code>(hook, *[, prepend, ...])</p></td>
+<td><p>Registers a forward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_pre_hook</span></code>(hook, *[, ...])</p></td>
+<td><p>Registers a forward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_hook</span></code>(hook[, prepend])</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_pre_hook</span></code>(hook[, prepend])</p></td>
+<td><p>Registers a backward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_load_state_dict_post_hook</span></code>(hook)</p></td>
+<td><p>Registers a post hook to be run after module's <code class="docutils literal notranslate"><span class="pre">load_state_dict</span></code> is called.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_module</span></code>(name, module)</p></td>
+<td><p>Alias for <code class="xref py py-func docutils literal notranslate"><span class="pre">add_module()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_parameter</span></code>(name, param)</p></td>
+<td><p>Adds a parameter to the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_state_dict_pre_hook</span></code>(hook)</p></td>
+<td><p>These hooks will be called with arguments: <code class="docutils literal notranslate"><span class="pre">self</span></code>, <code class="docutils literal notranslate"><span class="pre">prefix</span></code>, and <code class="docutils literal notranslate"><span class="pre">keep_vars</span></code> before calling <code class="docutils literal notranslate"><span class="pre">state_dict</span></code> on <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">requires_grad_</span></code>([requires_grad])</p></td>
+<td><p>Change if autograd should record operations on parameters in this module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_extra_state</span></code>(state)</p></td>
+<td><p>This function is called from <code class="xref py py-func docutils literal notranslate"><span class="pre">load_state_dict()</span></code> to handle any extra state found within the <cite>state_dict</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">share_memory</span></code>()</p></td>
+<td><p>See <code class="xref py py-meth docutils literal notranslate"><span class="pre">torch.Tensor.share_memory_()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">state_dict</span></code>(*args[, destination, prefix, ...])</p></td>
+<td><p>Returns a dictionary containing references to the whole state of the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to</span></code>(*args, **kwargs)</p></td>
+<td><p>Moves and/or casts the parameters and buffers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_empty</span></code>(*, device)</p></td>
+<td><p>Moves the parameters and buffers to the specified device without copying storage.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code>([mode])</p></td>
+<td><p>Sets the module in training mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code>(dst_type)</p></td>
+<td><p>Casts all parameters and buffers to <code class="xref py py-attr docutils literal notranslate"><span class="pre">dst_type</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">xpu</span></code>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the XPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero_grad</span></code>([set_to_none])</p></td>
+<td><p>Sets gradients of all model parameters to zero.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>__call__</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>calculate_eval_metric</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>calculate_loss</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>eval_step</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>pre_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>train_step</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>valid_step</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.calculate_eval_metric">
+<span class="sig-name descname"><span class="pre">calculate_eval_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/base_model_wrapper.html#ModelWrapper.calculate_eval_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.calculate_eval_metric" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.calculate_loss">
+<span class="sig-name descname"><span class="pre">calculate_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/base_model_wrapper.html#ModelWrapper.calculate_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.calculate_loss" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.eval_step">
+<span class="sig-name descname"><span class="pre">eval_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/base_model_wrapper.html#ModelWrapper.eval_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.eval_step" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.evaluator">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">evaluator</span></span><a class="headerlink" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.evaluator" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/base_model_wrapper.html#ModelWrapper.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.forward" title="Link to this definition">¶</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.loss">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">loss</span></span><a class="headerlink" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.loss" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.model">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.model" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.post_stage">
+<span class="sig-name descname"><span class="pre">post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/base_model_wrapper.html#ModelWrapper.post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.pre_stage">
+<span class="sig-name descname"><span class="pre">pre_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/base_model_wrapper.html#ModelWrapper.pre_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.pre_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.train_step">
+<span class="sig-name descname"><span class="pre">train_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/base_model_wrapper.html#ModelWrapper.train_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.train_step" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.valid_step">
+<span class="sig-name descname"><span class="pre">valid_step</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/base_model_wrapper.html#ModelWrapper.valid_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.valid_step" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-satgl.wrappers.model_wrappers.cnf_model_wrappers">
+<span id="satgl-wrappers-model-wrappers-cnf-model-wrappers-module"></span><h2>satgl.wrappers.model_wrappers.cnf_model_wrappers module<a class="headerlink" href="#module-satgl.wrappers.model_wrappers.cnf_model_wrappers" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">satgl.wrappers.model_wrappers.cnf_model_wrappers.</span></span><span class="sig-name descname"><span class="pre">CNFModelWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#CNFModelWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper" title="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">ModelWrapper</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>evaluator</strong></dt><dd></dd>
+<dt><strong>loss</strong></dt><dd></dd>
+<dt><strong>model</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_module</span></code>(name, module)</p></td>
+<td><p>Adds a child module to the current module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code>(fn)</p></td>
+<td><p>Applies <code class="docutils literal notranslate"><span class="pre">fn</span></code> recursively to every submodule (as returned by <code class="docutils literal notranslate"><span class="pre">.children()</span></code>) as well as self.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bfloat16</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">bfloat16</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">buffers</span></code>([recurse])</p></td>
+<td><p>Returns an iterator over module buffers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code>()</p></td>
+<td><p>Returns an iterator over immediate children modules.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cpu</span></code>()</p></td>
+<td><p>Moves all model parameters and buffers to the CPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cuda</span></code>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the GPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">double</span></code> datatype.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code>()</p></td>
+<td><p>Sets the module in evaluation mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">extra_repr</span></code>()</p></td>
+<td><p>Set the extra representation of the module</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">float</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.forward" title="satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.forward"><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code></a>(batch)</p></td>
+<td><p>Defines the computation performed at every call.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_buffer</span></code>(target)</p></td>
+<td><p>Returns the buffer given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_extra_state</span></code>()</p></td>
+<td><p>Returns any extra state to include in the module's state_dict.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parameter</span></code>(target)</p></td>
+<td><p>Returns the parameter given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_submodule</span></code>(target)</p></td>
+<td><p>Returns the submodule given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">half</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">half</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipu</span></code>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the IPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_state_dict</span></code>(state_dict[, strict])</p></td>
+<td><p>Copies parameters and buffers from <code class="xref py py-attr docutils literal notranslate"><span class="pre">state_dict</span></code> into this module and its descendants.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code>()</p></td>
+<td><p>Returns an iterator over all modules in the network.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_buffers</span></code>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module buffers, yielding both the name of the buffer as well as the buffer itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_children</span></code>()</p></td>
+<td><p>Returns an iterator over immediate children modules, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_modules</span></code>([memo, prefix, remove_duplicate])</p></td>
+<td><p>Returns an iterator over all modules in the network, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_parameters</span></code>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module parameters, yielding both the name of the parameter as well as the parameter itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">parameters</span></code>([recurse])</p></td>
+<td><p>Returns an iterator over module parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_backward_hook</span></code>(hook)</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_buffer</span></code>(name, tensor[, persistent])</p></td>
+<td><p>Adds a buffer to the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_hook</span></code>(hook, *[, prepend, ...])</p></td>
+<td><p>Registers a forward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_pre_hook</span></code>(hook, *[, ...])</p></td>
+<td><p>Registers a forward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_hook</span></code>(hook[, prepend])</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_pre_hook</span></code>(hook[, prepend])</p></td>
+<td><p>Registers a backward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_load_state_dict_post_hook</span></code>(hook)</p></td>
+<td><p>Registers a post hook to be run after module's <code class="docutils literal notranslate"><span class="pre">load_state_dict</span></code> is called.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_module</span></code>(name, module)</p></td>
+<td><p>Alias for <code class="xref py py-func docutils literal notranslate"><span class="pre">add_module()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_parameter</span></code>(name, param)</p></td>
+<td><p>Adds a parameter to the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_state_dict_pre_hook</span></code>(hook)</p></td>
+<td><p>These hooks will be called with arguments: <code class="docutils literal notranslate"><span class="pre">self</span></code>, <code class="docutils literal notranslate"><span class="pre">prefix</span></code>, and <code class="docutils literal notranslate"><span class="pre">keep_vars</span></code> before calling <code class="docutils literal notranslate"><span class="pre">state_dict</span></code> on <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">requires_grad_</span></code>([requires_grad])</p></td>
+<td><p>Change if autograd should record operations on parameters in this module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_extra_state</span></code>(state)</p></td>
+<td><p>This function is called from <code class="xref py py-func docutils literal notranslate"><span class="pre">load_state_dict()</span></code> to handle any extra state found within the <cite>state_dict</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">share_memory</span></code>()</p></td>
+<td><p>See <code class="xref py py-meth docutils literal notranslate"><span class="pre">torch.Tensor.share_memory_()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">state_dict</span></code>(*args[, destination, prefix, ...])</p></td>
+<td><p>Returns a dictionary containing references to the whole state of the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to</span></code>(*args, **kwargs)</p></td>
+<td><p>Moves and/or casts the parameters and buffers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_empty</span></code>(*, device)</p></td>
+<td><p>Moves the parameters and buffers to the specified device without copying storage.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code>([mode])</p></td>
+<td><p>Sets the module in training mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code>(dst_type)</p></td>
+<td><p>Casts all parameters and buffers to <code class="xref py py-attr docutils literal notranslate"><span class="pre">dst_type</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">xpu</span></code>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the XPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero_grad</span></code>([set_to_none])</p></td>
+<td><p>Sets gradients of all model parameters to zero.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>__call__</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>calculate_eval_metric</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>calculate_loss</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>eval_step</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>init_post_stage_network</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>init_pre_stage_networks</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>lcg_post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>lig_post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>pre_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>train_step</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>valid_step</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>vcg_post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>vig_post_stage</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#CNFModelWrapper.forward"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.forward" title="Link to this definition">¶</a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.init_post_stage_network">
+<span class="sig-name descname"><span class="pre">init_post_stage_network</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#CNFModelWrapper.init_post_stage_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.init_post_stage_network" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.init_pre_stage_networks">
+<span class="sig-name descname"><span class="pre">init_pre_stage_networks</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#CNFModelWrapper.init_pre_stage_networks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.init_pre_stage_networks" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.lcg_post_stage">
+<span class="sig-name descname"><span class="pre">lcg_post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#CNFModelWrapper.lcg_post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.lcg_post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.lig_post_stage">
+<span class="sig-name descname"><span class="pre">lig_post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#CNFModelWrapper.lig_post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.lig_post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.post_stage">
+<span class="sig-name descname"><span class="pre">post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#CNFModelWrapper.post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.pre_stage">
+<span class="sig-name descname"><span class="pre">pre_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#CNFModelWrapper.pre_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.pre_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.vcg_post_stage">
+<span class="sig-name descname"><span class="pre">vcg_post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#CNFModelWrapper.vcg_post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.vcg_post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.vig_post_stage">
+<span class="sig-name descname"><span class="pre">vig_post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#CNFModelWrapper.vig_post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.vig_post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.MaxSATModelWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">satgl.wrappers.model_wrappers.cnf_model_wrappers.</span></span><span class="sig-name descname"><span class="pre">MaxSATModelWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#MaxSATModelWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.MaxSATModelWrapper" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper" title="satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">CNFModelWrapper</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>evaluator</strong></dt><dd></dd>
+<dt><strong>loss</strong></dt><dd></dd>
+<dt><strong>model</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_module</span></code>(name, module)</p></td>
+<td><p>Adds a child module to the current module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code>(fn)</p></td>
+<td><p>Applies <code class="docutils literal notranslate"><span class="pre">fn</span></code> recursively to every submodule (as returned by <code class="docutils literal notranslate"><span class="pre">.children()</span></code>) as well as self.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bfloat16</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">bfloat16</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">buffers</span></code>([recurse])</p></td>
+<td><p>Returns an iterator over module buffers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code>()</p></td>
+<td><p>Returns an iterator over immediate children modules.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cpu</span></code>()</p></td>
+<td><p>Moves all model parameters and buffers to the CPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cuda</span></code>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the GPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">double</span></code> datatype.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code>()</p></td>
+<td><p>Sets the module in evaluation mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">extra_repr</span></code>()</p></td>
+<td><p>Set the extra representation of the module</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">float</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code>(batch)</p></td>
+<td><p>Defines the computation performed at every call.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_buffer</span></code>(target)</p></td>
+<td><p>Returns the buffer given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_extra_state</span></code>()</p></td>
+<td><p>Returns any extra state to include in the module's state_dict.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parameter</span></code>(target)</p></td>
+<td><p>Returns the parameter given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_submodule</span></code>(target)</p></td>
+<td><p>Returns the submodule given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">half</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">half</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipu</span></code>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the IPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_state_dict</span></code>(state_dict[, strict])</p></td>
+<td><p>Copies parameters and buffers from <code class="xref py py-attr docutils literal notranslate"><span class="pre">state_dict</span></code> into this module and its descendants.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code>()</p></td>
+<td><p>Returns an iterator over all modules in the network.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_buffers</span></code>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module buffers, yielding both the name of the buffer as well as the buffer itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_children</span></code>()</p></td>
+<td><p>Returns an iterator over immediate children modules, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_modules</span></code>([memo, prefix, remove_duplicate])</p></td>
+<td><p>Returns an iterator over all modules in the network, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_parameters</span></code>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module parameters, yielding both the name of the parameter as well as the parameter itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">parameters</span></code>([recurse])</p></td>
+<td><p>Returns an iterator over module parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_backward_hook</span></code>(hook)</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_buffer</span></code>(name, tensor[, persistent])</p></td>
+<td><p>Adds a buffer to the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_hook</span></code>(hook, *[, prepend, ...])</p></td>
+<td><p>Registers a forward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_pre_hook</span></code>(hook, *[, ...])</p></td>
+<td><p>Registers a forward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_hook</span></code>(hook[, prepend])</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_pre_hook</span></code>(hook[, prepend])</p></td>
+<td><p>Registers a backward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_load_state_dict_post_hook</span></code>(hook)</p></td>
+<td><p>Registers a post hook to be run after module's <code class="docutils literal notranslate"><span class="pre">load_state_dict</span></code> is called.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_module</span></code>(name, module)</p></td>
+<td><p>Alias for <code class="xref py py-func docutils literal notranslate"><span class="pre">add_module()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_parameter</span></code>(name, param)</p></td>
+<td><p>Adds a parameter to the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_state_dict_pre_hook</span></code>(hook)</p></td>
+<td><p>These hooks will be called with arguments: <code class="docutils literal notranslate"><span class="pre">self</span></code>, <code class="docutils literal notranslate"><span class="pre">prefix</span></code>, and <code class="docutils literal notranslate"><span class="pre">keep_vars</span></code> before calling <code class="docutils literal notranslate"><span class="pre">state_dict</span></code> on <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">requires_grad_</span></code>([requires_grad])</p></td>
+<td><p>Change if autograd should record operations on parameters in this module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_extra_state</span></code>(state)</p></td>
+<td><p>This function is called from <code class="xref py py-func docutils literal notranslate"><span class="pre">load_state_dict()</span></code> to handle any extra state found within the <cite>state_dict</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">share_memory</span></code>()</p></td>
+<td><p>See <code class="xref py py-meth docutils literal notranslate"><span class="pre">torch.Tensor.share_memory_()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">state_dict</span></code>(*args[, destination, prefix, ...])</p></td>
+<td><p>Returns a dictionary containing references to the whole state of the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to</span></code>(*args, **kwargs)</p></td>
+<td><p>Moves and/or casts the parameters and buffers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_empty</span></code>(*, device)</p></td>
+<td><p>Moves the parameters and buffers to the specified device without copying storage.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code>([mode])</p></td>
+<td><p>Sets the module in training mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code>(dst_type)</p></td>
+<td><p>Casts all parameters and buffers to <code class="xref py py-attr docutils literal notranslate"><span class="pre">dst_type</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">xpu</span></code>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the XPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero_grad</span></code>([set_to_none])</p></td>
+<td><p>Sets gradients of all model parameters to zero.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>__call__</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>calculate_eval_metric</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>calculate_loss</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>eval_step</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>init_post_stage_network</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>init_pre_stage_networks</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>lcg_post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>lig_post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>pre_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>train_step</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>valid_step</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>vcg_post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>vig_post_stage</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.MaxSATModelWrapper.init_post_stage_network">
+<span class="sig-name descname"><span class="pre">init_post_stage_network</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#MaxSATModelWrapper.init_post_stage_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.MaxSATModelWrapper.init_post_stage_network" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.MaxSATModelWrapper.lcg_post_stage">
+<span class="sig-name descname"><span class="pre">lcg_post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#MaxSATModelWrapper.lcg_post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.MaxSATModelWrapper.lcg_post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.MaxSATModelWrapper.lig_post_stage">
+<span class="sig-name descname"><span class="pre">lig_post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#MaxSATModelWrapper.lig_post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.MaxSATModelWrapper.lig_post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.MaxSATModelWrapper.post_stage">
+<span class="sig-name descname"><span class="pre">post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#MaxSATModelWrapper.post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.MaxSATModelWrapper.post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">satgl.wrappers.model_wrappers.cnf_model_wrappers.</span></span><span class="sig-name descname"><span class="pre">SatisfiabilityModelWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#SatisfiabilityModelWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper" title="satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">CNFModelWrapper</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>evaluator</strong></dt><dd></dd>
+<dt><strong>loss</strong></dt><dd></dd>
+<dt><strong>model</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_module</span></code>(name, module)</p></td>
+<td><p>Adds a child module to the current module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code>(fn)</p></td>
+<td><p>Applies <code class="docutils literal notranslate"><span class="pre">fn</span></code> recursively to every submodule (as returned by <code class="docutils literal notranslate"><span class="pre">.children()</span></code>) as well as self.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bfloat16</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">bfloat16</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">buffers</span></code>([recurse])</p></td>
+<td><p>Returns an iterator over module buffers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code>()</p></td>
+<td><p>Returns an iterator over immediate children modules.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cpu</span></code>()</p></td>
+<td><p>Moves all model parameters and buffers to the CPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cuda</span></code>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the GPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">double</span></code> datatype.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code>()</p></td>
+<td><p>Sets the module in evaluation mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">extra_repr</span></code>()</p></td>
+<td><p>Set the extra representation of the module</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">float</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code>(batch)</p></td>
+<td><p>Defines the computation performed at every call.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_buffer</span></code>(target)</p></td>
+<td><p>Returns the buffer given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_extra_state</span></code>()</p></td>
+<td><p>Returns any extra state to include in the module's state_dict.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parameter</span></code>(target)</p></td>
+<td><p>Returns the parameter given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_submodule</span></code>(target)</p></td>
+<td><p>Returns the submodule given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">half</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">half</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipu</span></code>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the IPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_state_dict</span></code>(state_dict[, strict])</p></td>
+<td><p>Copies parameters and buffers from <code class="xref py py-attr docutils literal notranslate"><span class="pre">state_dict</span></code> into this module and its descendants.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code>()</p></td>
+<td><p>Returns an iterator over all modules in the network.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_buffers</span></code>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module buffers, yielding both the name of the buffer as well as the buffer itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_children</span></code>()</p></td>
+<td><p>Returns an iterator over immediate children modules, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_modules</span></code>([memo, prefix, remove_duplicate])</p></td>
+<td><p>Returns an iterator over all modules in the network, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_parameters</span></code>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module parameters, yielding both the name of the parameter as well as the parameter itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">parameters</span></code>([recurse])</p></td>
+<td><p>Returns an iterator over module parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_backward_hook</span></code>(hook)</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_buffer</span></code>(name, tensor[, persistent])</p></td>
+<td><p>Adds a buffer to the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_hook</span></code>(hook, *[, prepend, ...])</p></td>
+<td><p>Registers a forward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_pre_hook</span></code>(hook, *[, ...])</p></td>
+<td><p>Registers a forward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_hook</span></code>(hook[, prepend])</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_pre_hook</span></code>(hook[, prepend])</p></td>
+<td><p>Registers a backward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_load_state_dict_post_hook</span></code>(hook)</p></td>
+<td><p>Registers a post hook to be run after module's <code class="docutils literal notranslate"><span class="pre">load_state_dict</span></code> is called.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_module</span></code>(name, module)</p></td>
+<td><p>Alias for <code class="xref py py-func docutils literal notranslate"><span class="pre">add_module()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_parameter</span></code>(name, param)</p></td>
+<td><p>Adds a parameter to the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_state_dict_pre_hook</span></code>(hook)</p></td>
+<td><p>These hooks will be called with arguments: <code class="docutils literal notranslate"><span class="pre">self</span></code>, <code class="docutils literal notranslate"><span class="pre">prefix</span></code>, and <code class="docutils literal notranslate"><span class="pre">keep_vars</span></code> before calling <code class="docutils literal notranslate"><span class="pre">state_dict</span></code> on <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">requires_grad_</span></code>([requires_grad])</p></td>
+<td><p>Change if autograd should record operations on parameters in this module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_extra_state</span></code>(state)</p></td>
+<td><p>This function is called from <code class="xref py py-func docutils literal notranslate"><span class="pre">load_state_dict()</span></code> to handle any extra state found within the <cite>state_dict</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">share_memory</span></code>()</p></td>
+<td><p>See <code class="xref py py-meth docutils literal notranslate"><span class="pre">torch.Tensor.share_memory_()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">state_dict</span></code>(*args[, destination, prefix, ...])</p></td>
+<td><p>Returns a dictionary containing references to the whole state of the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to</span></code>(*args, **kwargs)</p></td>
+<td><p>Moves and/or casts the parameters and buffers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_empty</span></code>(*, device)</p></td>
+<td><p>Moves the parameters and buffers to the specified device without copying storage.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code>([mode])</p></td>
+<td><p>Sets the module in training mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code>(dst_type)</p></td>
+<td><p>Casts all parameters and buffers to <code class="xref py py-attr docutils literal notranslate"><span class="pre">dst_type</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">xpu</span></code>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the XPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero_grad</span></code>([set_to_none])</p></td>
+<td><p>Sets gradients of all model parameters to zero.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>__call__</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>calculate_eval_metric</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>calculate_loss</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>eval_step</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>init_post_stage_network</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>init_pre_stage_networks</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>lcg_post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>lig_post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>pre_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>train_step</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>valid_step</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>vcg_post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>vig_post_stage</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.init_post_stage_network">
+<span class="sig-name descname"><span class="pre">init_post_stage_network</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#SatisfiabilityModelWrapper.init_post_stage_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.init_post_stage_network" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.lcg_post_stage">
+<span class="sig-name descname"><span class="pre">lcg_post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#SatisfiabilityModelWrapper.lcg_post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.lcg_post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.lig_post_stage">
+<span class="sig-name descname"><span class="pre">lig_post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#SatisfiabilityModelWrapper.lig_post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.lig_post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.post_stage">
+<span class="sig-name descname"><span class="pre">post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#SatisfiabilityModelWrapper.post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.vcg_post_stage">
+<span class="sig-name descname"><span class="pre">vcg_post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#SatisfiabilityModelWrapper.vcg_post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.vcg_post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.vig_post_stage">
+<span class="sig-name descname"><span class="pre">vig_post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#SatisfiabilityModelWrapper.vig_post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.vig_post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.UnSATCoreModelWrapper">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">satgl.wrappers.model_wrappers.cnf_model_wrappers.</span></span><span class="sig-name descname"><span class="pre">UnSATCoreModelWrapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#UnSATCoreModelWrapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.UnSATCoreModelWrapper" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper" title="satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper"><code class="xref py py-class docutils literal notranslate"><span class="pre">CNFModelWrapper</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>evaluator</strong></dt><dd></dd>
+<dt><strong>loss</strong></dt><dd></dd>
+<dt><strong>model</strong></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_module</span></code>(name, module)</p></td>
+<td><p>Adds a child module to the current module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply</span></code>(fn)</p></td>
+<td><p>Applies <code class="docutils literal notranslate"><span class="pre">fn</span></code> recursively to every submodule (as returned by <code class="docutils literal notranslate"><span class="pre">.children()</span></code>) as well as self.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">bfloat16</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">bfloat16</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">buffers</span></code>([recurse])</p></td>
+<td><p>Returns an iterator over module buffers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">children</span></code>()</p></td>
+<td><p>Returns an iterator over immediate children modules.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cpu</span></code>()</p></td>
+<td><p>Moves all model parameters and buffers to the CPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">cuda</span></code>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the GPU.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">double</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">double</span></code> datatype.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">eval</span></code>()</p></td>
+<td><p>Sets the module in evaluation mode.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">extra_repr</span></code>()</p></td>
+<td><p>Set the extra representation of the module</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">float</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">forward</span></code>(batch)</p></td>
+<td><p>Defines the computation performed at every call.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_buffer</span></code>(target)</p></td>
+<td><p>Returns the buffer given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_extra_state</span></code>()</p></td>
+<td><p>Returns any extra state to include in the module's state_dict.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_parameter</span></code>(target)</p></td>
+<td><p>Returns the parameter given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_submodule</span></code>(target)</p></td>
+<td><p>Returns the submodule given by <code class="docutils literal notranslate"><span class="pre">target</span></code> if it exists, otherwise throws an error.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">half</span></code>()</p></td>
+<td><p>Casts all floating point parameters and buffers to <code class="docutils literal notranslate"><span class="pre">half</span></code> datatype.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">ipu</span></code>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the IPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_state_dict</span></code>(state_dict[, strict])</p></td>
+<td><p>Copies parameters and buffers from <code class="xref py py-attr docutils literal notranslate"><span class="pre">state_dict</span></code> into this module and its descendants.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">modules</span></code>()</p></td>
+<td><p>Returns an iterator over all modules in the network.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_buffers</span></code>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module buffers, yielding both the name of the buffer as well as the buffer itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_children</span></code>()</p></td>
+<td><p>Returns an iterator over immediate children modules, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_modules</span></code>([memo, prefix, remove_duplicate])</p></td>
+<td><p>Returns an iterator over all modules in the network, yielding both the name of the module as well as the module itself.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">named_parameters</span></code>([prefix, recurse, ...])</p></td>
+<td><p>Returns an iterator over module parameters, yielding both the name of the parameter as well as the parameter itself.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">parameters</span></code>([recurse])</p></td>
+<td><p>Returns an iterator over module parameters.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_backward_hook</span></code>(hook)</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_buffer</span></code>(name, tensor[, persistent])</p></td>
+<td><p>Adds a buffer to the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_hook</span></code>(hook, *[, prepend, ...])</p></td>
+<td><p>Registers a forward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_forward_pre_hook</span></code>(hook, *[, ...])</p></td>
+<td><p>Registers a forward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_hook</span></code>(hook[, prepend])</p></td>
+<td><p>Registers a backward hook on the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_full_backward_pre_hook</span></code>(hook[, prepend])</p></td>
+<td><p>Registers a backward pre-hook on the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_load_state_dict_post_hook</span></code>(hook)</p></td>
+<td><p>Registers a post hook to be run after module's <code class="docutils literal notranslate"><span class="pre">load_state_dict</span></code> is called.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_module</span></code>(name, module)</p></td>
+<td><p>Alias for <code class="xref py py-func docutils literal notranslate"><span class="pre">add_module()</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_parameter</span></code>(name, param)</p></td>
+<td><p>Adds a parameter to the module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">register_state_dict_pre_hook</span></code>(hook)</p></td>
+<td><p>These hooks will be called with arguments: <code class="docutils literal notranslate"><span class="pre">self</span></code>, <code class="docutils literal notranslate"><span class="pre">prefix</span></code>, and <code class="docutils literal notranslate"><span class="pre">keep_vars</span></code> before calling <code class="docutils literal notranslate"><span class="pre">state_dict</span></code> on <code class="docutils literal notranslate"><span class="pre">self</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">requires_grad_</span></code>([requires_grad])</p></td>
+<td><p>Change if autograd should record operations on parameters in this module.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_extra_state</span></code>(state)</p></td>
+<td><p>This function is called from <code class="xref py py-func docutils literal notranslate"><span class="pre">load_state_dict()</span></code> to handle any extra state found within the <cite>state_dict</cite>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">share_memory</span></code>()</p></td>
+<td><p>See <code class="xref py py-meth docutils literal notranslate"><span class="pre">torch.Tensor.share_memory_()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">state_dict</span></code>(*args[, destination, prefix, ...])</p></td>
+<td><p>Returns a dictionary containing references to the whole state of the module.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to</span></code>(*args, **kwargs)</p></td>
+<td><p>Moves and/or casts the parameters and buffers.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_empty</span></code>(*, device)</p></td>
+<td><p>Moves the parameters and buffers to the specified device without copying storage.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code>([mode])</p></td>
+<td><p>Sets the module in training mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">type</span></code>(dst_type)</p></td>
+<td><p>Casts all parameters and buffers to <code class="xref py py-attr docutils literal notranslate"><span class="pre">dst_type</span></code>.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">xpu</span></code>([device])</p></td>
+<td><p>Moves all model parameters and buffers to the XPU.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">zero_grad</span></code>([set_to_none])</p></td>
+<td><p>Sets gradients of all model parameters to zero.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>__call__</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>calculate_eval_metric</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>calculate_loss</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>eval_step</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>init_post_stage_network</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>init_pre_stage_networks</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>lcg_post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>lig_post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>pre_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>train_step</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>valid_step</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><strong>vcg_post_stage</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>vig_post_stage</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.UnSATCoreModelWrapper.init_post_stage_network">
+<span class="sig-name descname"><span class="pre">init_post_stage_network</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#UnSATCoreModelWrapper.init_post_stage_network"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.UnSATCoreModelWrapper.init_post_stage_network" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.UnSATCoreModelWrapper.lcg_post_stage">
+<span class="sig-name descname"><span class="pre">lcg_post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#UnSATCoreModelWrapper.lcg_post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.UnSATCoreModelWrapper.lcg_post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.UnSATCoreModelWrapper.post_stage">
+<span class="sig-name descname"><span class="pre">post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#UnSATCoreModelWrapper.post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.UnSATCoreModelWrapper.post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.wrappers.model_wrappers.cnf_model_wrappers.UnSATCoreModelWrapper.vcg_post_stage">
+<span class="sig-name descname"><span class="pre">vcg_post_stage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/wrappers/model_wrappers/cnf_model_wrappers.html#UnSATCoreModelWrapper.vcg_post_stage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.UnSATCoreModelWrapper.vcg_post_stage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-satgl.wrappers.model_wrappers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-satgl.wrappers.model_wrappers" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">satgl.wrappers.model_wrappers package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-satgl.wrappers.model_wrappers.base_model_wrapper">satgl.wrappers.model_wrappers.base_model_wrapper module</a><ul>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper"><code class="docutils literal notranslate"><span class="pre">ModelWrapper</span></code></a><ul>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.calculate_eval_metric"><code class="docutils literal notranslate"><span class="pre">ModelWrapper.calculate_eval_metric()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.calculate_loss"><code class="docutils literal notranslate"><span class="pre">ModelWrapper.calculate_loss()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.eval_step"><code class="docutils literal notranslate"><span class="pre">ModelWrapper.eval_step()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.evaluator"><code class="docutils literal notranslate"><span class="pre">ModelWrapper.evaluator</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.forward"><code class="docutils literal notranslate"><span class="pre">ModelWrapper.forward()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.loss"><code class="docutils literal notranslate"><span class="pre">ModelWrapper.loss</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.model"><code class="docutils literal notranslate"><span class="pre">ModelWrapper.model</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.post_stage"><code class="docutils literal notranslate"><span class="pre">ModelWrapper.post_stage()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.pre_stage"><code class="docutils literal notranslate"><span class="pre">ModelWrapper.pre_stage()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.train_step"><code class="docutils literal notranslate"><span class="pre">ModelWrapper.train_step()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper.valid_step"><code class="docutils literal notranslate"><span class="pre">ModelWrapper.valid_step()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-satgl.wrappers.model_wrappers.cnf_model_wrappers">satgl.wrappers.model_wrappers.cnf_model_wrappers module</a><ul>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper"><code class="docutils literal notranslate"><span class="pre">CNFModelWrapper</span></code></a><ul>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.forward"><code class="docutils literal notranslate"><span class="pre">CNFModelWrapper.forward()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.init_post_stage_network"><code class="docutils literal notranslate"><span class="pre">CNFModelWrapper.init_post_stage_network()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.init_pre_stage_networks"><code class="docutils literal notranslate"><span class="pre">CNFModelWrapper.init_pre_stage_networks()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.lcg_post_stage"><code class="docutils literal notranslate"><span class="pre">CNFModelWrapper.lcg_post_stage()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.lig_post_stage"><code class="docutils literal notranslate"><span class="pre">CNFModelWrapper.lig_post_stage()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.post_stage"><code class="docutils literal notranslate"><span class="pre">CNFModelWrapper.post_stage()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.pre_stage"><code class="docutils literal notranslate"><span class="pre">CNFModelWrapper.pre_stage()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.vcg_post_stage"><code class="docutils literal notranslate"><span class="pre">CNFModelWrapper.vcg_post_stage()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.CNFModelWrapper.vig_post_stage"><code class="docutils literal notranslate"><span class="pre">CNFModelWrapper.vig_post_stage()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.MaxSATModelWrapper"><code class="docutils literal notranslate"><span class="pre">MaxSATModelWrapper</span></code></a><ul>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.MaxSATModelWrapper.init_post_stage_network"><code class="docutils literal notranslate"><span class="pre">MaxSATModelWrapper.init_post_stage_network()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.MaxSATModelWrapper.lcg_post_stage"><code class="docutils literal notranslate"><span class="pre">MaxSATModelWrapper.lcg_post_stage()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.MaxSATModelWrapper.lig_post_stage"><code class="docutils literal notranslate"><span class="pre">MaxSATModelWrapper.lig_post_stage()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.MaxSATModelWrapper.post_stage"><code class="docutils literal notranslate"><span class="pre">MaxSATModelWrapper.post_stage()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper"><code class="docutils literal notranslate"><span class="pre">SatisfiabilityModelWrapper</span></code></a><ul>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.init_post_stage_network"><code class="docutils literal notranslate"><span class="pre">SatisfiabilityModelWrapper.init_post_stage_network()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.lcg_post_stage"><code class="docutils literal notranslate"><span class="pre">SatisfiabilityModelWrapper.lcg_post_stage()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.lig_post_stage"><code class="docutils literal notranslate"><span class="pre">SatisfiabilityModelWrapper.lig_post_stage()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.post_stage"><code class="docutils literal notranslate"><span class="pre">SatisfiabilityModelWrapper.post_stage()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.vcg_post_stage"><code class="docutils literal notranslate"><span class="pre">SatisfiabilityModelWrapper.vcg_post_stage()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.SatisfiabilityModelWrapper.vig_post_stage"><code class="docutils literal notranslate"><span class="pre">SatisfiabilityModelWrapper.vig_post_stage()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.UnSATCoreModelWrapper"><code class="docutils literal notranslate"><span class="pre">UnSATCoreModelWrapper</span></code></a><ul>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.UnSATCoreModelWrapper.init_post_stage_network"><code class="docutils literal notranslate"><span class="pre">UnSATCoreModelWrapper.init_post_stage_network()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.UnSATCoreModelWrapper.lcg_post_stage"><code class="docutils literal notranslate"><span class="pre">UnSATCoreModelWrapper.lcg_post_stage()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.UnSATCoreModelWrapper.post_stage"><code class="docutils literal notranslate"><span class="pre">UnSATCoreModelWrapper.post_stage()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.wrappers.model_wrappers.cnf_model_wrappers.UnSATCoreModelWrapper.vcg_post_stage"><code class="docutils literal notranslate"><span class="pre">UnSATCoreModelWrapper.vcg_post_stage()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-satgl.wrappers.model_wrappers">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/satgl.wrappers.model_wrappers.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SATGL  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">satgl.wrappers.model_wrappers package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Clinozoisite.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+  </body>
+</html>

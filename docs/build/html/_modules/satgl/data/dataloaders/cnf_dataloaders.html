@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<html lang="python" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>satgl.data.dataloaders.cnf_dataloaders &#8212; SATGL  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../../../_static/documentation_options.js?v=d048f138"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for satgl.data.dataloaders.cnf_dataloaders</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">dgl</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">from</span> <span class="nn">dgl.dataloading</span> <span class="kn">import</span> <span class="n">GraphCollator</span><span class="p">,</span> <span class="n">GraphDataLoader</span>
+
+<div class="viewcode-block" id="satisfiability_collate_fn">
+<a class="viewcode-back" href="../../../../satgl.data.dataloaders.html#satgl.data.dataloaders.cnf_dataloaders.satisfiability_collate_fn">[docs]</a>
+<span class="k">def</span> <span class="nf">satisfiability_collate_fn</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">GraphCollator</span><span class="p">()</span><span class="o">.</span><span class="n">collate</span><span class="p">([</span><span class="n">item</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="o">*</span><span class="n">data</span><span class="p">))])</span></div>
+
+
+<div class="viewcode-block" id="maxsat_collate_fn">
+<a class="viewcode-back" href="../../../../satgl.data.dataloaders.html#satgl.data.dataloaders.cnf_dataloaders.maxsat_collate_fn">[docs]</a>
+<span class="k">def</span> <span class="nf">maxsat_collate_fn</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">batched_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="n">GraphCollator</span><span class="p">()</span><span class="o">.</span><span class="n">collate</span><span class="p">([</span><span class="n">elem</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]),</span>
+        <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">elem</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">float</span><span class="p">()</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]),</span>
+        <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="n">GraphCollator</span><span class="p">()</span><span class="o">.</span><span class="n">collate</span><span class="p">([</span><span class="n">elem</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">data</span><span class="p">])</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">batched_data</span></div>
+
+
+<div class="viewcode-block" id="unsat_core_collate_fn">
+<a class="viewcode-back" href="../../../../satgl.data.dataloaders.html#satgl.data.dataloaders.cnf_dataloaders.unsat_core_collate_fn">[docs]</a>
+<span class="k">def</span> <span class="nf">unsat_core_collate_fn</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">batched_data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;g&quot;</span><span class="p">:</span> <span class="n">GraphCollator</span><span class="p">()</span><span class="o">.</span><span class="n">collate</span><span class="p">([</span><span class="n">elem</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]),</span>
+        <span class="s2">&quot;label&quot;</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">elem</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">float</span><span class="p">()</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]),</span>
+        <span class="s2">&quot;info&quot;</span><span class="p">:</span> <span class="n">GraphCollator</span><span class="p">()</span><span class="o">.</span><span class="n">collate</span><span class="p">([</span><span class="n">elem</span><span class="p">[</span><span class="s2">&quot;info&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">elem</span> <span class="ow">in</span> <span class="n">data</span><span class="p">])</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">batched_data</span></div>
+
+
+
+<div class="viewcode-block" id="SatistifiabilityDataLoader">
+<a class="viewcode-back" href="../../../../satgl.data.dataloaders.html#satgl.data.dataloaders.cnf_dataloaders.SatistifiabilityDataLoader">[docs]</a>
+<span class="k">def</span> <span class="nf">SatistifiabilityDataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">GraphDataLoader</span><span class="p">(</span>
+        <span class="n">dataset</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+        <span class="n">shuffle</span><span class="o">=</span><span class="n">shuffle</span><span class="p">,</span>
+        <span class="n">collate_fn</span><span class="o">=</span><span class="n">satisfiability_collate_fn</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="MaxSATDataLoader">
+<a class="viewcode-back" href="../../../../satgl.data.dataloaders.html#satgl.data.dataloaders.cnf_dataloaders.MaxSATDataLoader">[docs]</a>
+<span class="k">def</span> <span class="nf">MaxSATDataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">GraphDataLoader</span><span class="p">(</span>
+        <span class="n">dataset</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+        <span class="n">shuffle</span><span class="o">=</span><span class="n">shuffle</span><span class="p">,</span>
+        <span class="n">collate_fn</span><span class="o">=</span><span class="n">maxsat_collate_fn</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="UnsatCoreDataLoader">
+<a class="viewcode-back" href="../../../../satgl.data.dataloaders.html#satgl.data.dataloaders.cnf_dataloaders.UnsatCoreDataLoader">[docs]</a>
+<span class="k">def</span> <span class="nf">UnsatCoreDataLoader</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">GraphDataLoader</span><span class="p">(</span>
+        <span class="n">dataset</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+        <span class="n">shuffle</span><span class="o">=</span><span class="n">shuffle</span><span class="p">,</span>
+        <span class="n">collate_fn</span><span class="o">=</span><span class="n">unsat_core_collate_fn</span><span class="p">,</span>
+    <span class="p">)</span></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">SATGL</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Clinozoisite.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

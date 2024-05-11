@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+
+<html lang="python" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>satgl.models.cnf_models.gnn &#8212; SATGL  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=12dfc556" />
+    <script src="../../../../_static/documentation_options.js?v=d048f138"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for satgl.models.cnf_models.gnn</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">dgl</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+
+<span class="kn">from</span> <span class="nn">satgl.models.layers.mlp</span> <span class="kn">import</span> <span class="n">MLP</span>
+
+<span class="kn">from</span> <span class="nn">dgl.nn.pytorch.conv</span> <span class="kn">import</span> <span class="n">GraphConv</span>
+<span class="kn">from</span> <span class="nn">dgl.nn.pytorch.conv</span> <span class="kn">import</span> <span class="n">GINConv</span>
+<span class="kn">from</span> <span class="nn">dgl.nn.pytorch</span> <span class="kn">import</span> <span class="n">HeteroGraphConv</span>
+
+
+<div class="viewcode-block" id="GeneralGNN">
+<a class="viewcode-back" href="../../../../satgl.models.cnf_models.html#satgl.models.cnf_models.gnn.GeneralGNN">[docs]</a>
+<span class="k">class</span> <span class="nc">GeneralGNN</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        General GNN model for CNF problems.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        config : Config</span>
+<span class="sd">            Configuration object.</span>
+<span class="sd">        </span>
+<span class="sd">        The subclass must implement the set_conv method to set the convolution function</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GeneralGNN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
+
+        <span class="c1"># check config</span>
+        <span class="k">if</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;graph_type&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;lcg&quot;</span><span class="p">,</span> <span class="s2">&quot;vcg&quot;</span><span class="p">,</span> <span class="s2">&quot;lig&quot;</span><span class="p">,</span> <span class="s2">&quot;vig&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;General GNN only support lcg, lig, vcg, vig.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">device</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">model_settings</span><span class="p">[</span><span class="s2">&quot;emb_size&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_fc</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">model_settings</span><span class="p">[</span><span class="s2">&quot;num_fc&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_round</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">model_settings</span><span class="p">[</span><span class="s2">&quot;num_round&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">graph_type</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s2">&quot;graph_type&quot;</span><span class="p">]</span>
+
+        <span class="c1"># build network</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_update_fn</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_forward_fn</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_conv</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_conv_layer</span><span class="p">()</span>
+
+<div class="viewcode-block" id="GeneralGNN.set_conv">
+<a class="viewcode-back" href="../../../../satgl.models.cnf_models.html#satgl.models.cnf_models.gnn.GeneralGNN.set_conv">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_conv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+    
+<div class="viewcode-block" id="GeneralGNN.build_conv_layer">
+<a class="viewcode-back" href="../../../../satgl.models.cnf_models.html#satgl.models.cnf_models.gnn.GeneralGNN.build_conv_layer">[docs]</a>
+    <span class="k">def</span> <span class="nf">build_conv_layer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_type</span> <span class="o">==</span> <span class="s2">&quot;lcg&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span> <span class="o">=</span> <span class="n">HeteroGraphConv</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="p">(</span><span class="s2">&quot;pos_l&quot;</span><span class="p">,</span> <span class="s2">&quot;pos_l2c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">,</span>
+                    <span class="p">(</span><span class="s2">&quot;neg_l&quot;</span><span class="p">,</span> <span class="s2">&quot;neg_l2c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">,</span>
+                    <span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;pos_c2l&quot;</span><span class="p">,</span> <span class="s2">&quot;pos_l&quot;</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">,</span>
+                    <span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;neg_c2l&quot;</span><span class="p">,</span> <span class="s2">&quot;neg_l&quot;</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">,</span>
+                <span class="p">},</span> 
+                <span class="n">aggregate</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_type</span> <span class="o">==</span> <span class="s2">&quot;vcg&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span> <span class="o">=</span> <span class="n">HeteroGraphConv</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="p">(</span><span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="s2">&quot;v2c&quot;</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">,</span>
+                    <span class="p">(</span><span class="s2">&quot;c&quot;</span><span class="p">,</span> <span class="s2">&quot;c2v&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">,</span>
+                <span class="p">},</span> 
+                <span class="n">aggregate</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_type</span> <span class="o">==</span> <span class="s2">&quot;lig&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span> <span class="o">=</span> <span class="n">HeteroGraphConv</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="p">(</span><span class="s2">&quot;pos_l&quot;</span><span class="p">,</span> <span class="s2">&quot;pos_pos_l2l&quot;</span><span class="p">,</span> <span class="s2">&quot;pos_l&quot;</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">,</span>
+                    <span class="p">(</span><span class="s2">&quot;pos_l&quot;</span><span class="p">,</span> <span class="s2">&quot;pos_neg_l2l&quot;</span><span class="p">,</span> <span class="s2">&quot;neg_l&quot;</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">,</span>
+                    <span class="p">(</span><span class="s2">&quot;neg_l&quot;</span><span class="p">,</span> <span class="s2">&quot;neg_pos_l2l&quot;</span><span class="p">,</span> <span class="s2">&quot;pos_l&quot;</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">,</span>
+                    <span class="p">(</span><span class="s2">&quot;neg_l&quot;</span><span class="p">,</span> <span class="s2">&quot;neg_neg_l2l&quot;</span><span class="p">,</span> <span class="s2">&quot;neg_l&quot;</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">,</span>
+                <span class="p">},</span> 
+                <span class="n">aggregate</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_type</span> <span class="o">==</span> <span class="s2">&quot;vig&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span> <span class="o">=</span> <span class="n">HeteroGraphConv</span><span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="p">(</span><span class="s2">&quot;v&quot;</span><span class="p">,</span> <span class="s2">&quot;v2v&quot;</span><span class="p">,</span> <span class="s2">&quot;v&quot;</span><span class="p">):</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">,</span>
+                <span class="p">},</span> 
+                <span class="n">aggregate</span><span class="o">=</span><span class="s2">&quot;sum&quot;</span>
+            <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GeneralGNN.build_update_fn">
+<a class="viewcode-back" href="../../../../satgl.models.cnf_models.html#satgl.models.cnf_models.gnn.GeneralGNN.build_update_fn">[docs]</a>
+    <span class="k">def</span> <span class="nf">build_update_fn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Build update functions for the model.</span>
+
+<span class="sd">        lcg uses l_msg_mlp, l_update, c_update</span>
+<span class="sd">        vcg uses v_msg_mlp, c_msg_mlp, v_update, c_update</span>
+<span class="sd">        lig uses l_msg_mlp, l_update</span>
+<span class="sd">        vig uses v_msg_mlp, v_update</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_type</span> <span class="o">==</span> <span class="s2">&quot;lcg&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">l_msg_mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="n">num_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_fc</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">c_msg_mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="n">num_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_fc</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">l_update</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="n">num_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_fc</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">c_update</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="n">num_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_fc</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_type</span> <span class="o">==</span> <span class="s2">&quot;vcg&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">v_msg_mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="n">num_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_fc</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">c_msg_mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="n">num_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_fc</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">v_update</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="n">num_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_fc</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">c_update</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="n">num_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_fc</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_type</span> <span class="o">==</span> <span class="s2">&quot;vig&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">v_msg_mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="n">num_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_fc</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">v_update</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="n">num_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_fc</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_type</span> <span class="o">==</span> <span class="s2">&quot;lig&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">l_msg_mlp</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="n">num_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_fc</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">l_update</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="n">num_layer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">num_fc</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid graph type&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GeneralGNN.set_forward_fn">
+<a class="viewcode-back" href="../../../../satgl.models.cnf_models.html#satgl.models.cnf_models.gnn.GeneralGNN.set_forward_fn">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_forward_fn</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_type</span> <span class="o">==</span> <span class="s2">&quot;lcg&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">forward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lcg_forward</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_type</span> <span class="o">==</span> <span class="s2">&quot;vcg&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">forward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vcg_forward</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_type</span> <span class="o">==</span> <span class="s2">&quot;vig&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">forward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vig_forward</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph_type</span> <span class="o">==</span> <span class="s2">&quot;lig&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">forward</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lig_forward</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid graph type&quot;</span><span class="p">)</span></div>
+
+        
+<div class="viewcode-block" id="GeneralGNN.lcg_forward">
+<a class="viewcode-back" href="../../../../satgl.models.cnf_models.html#satgl.models.cnf_models.gnn.GeneralGNN.lcg_forward">[docs]</a>
+    <span class="k">def</span> <span class="nf">lcg_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">]</span>
+        <span class="n">l_pos_emb</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;pos_l&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span>
+        <span class="n">l_neg_emb</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;neg_l&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span>
+        <span class="n">c_emb</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">round_idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_round</span><span class="p">)):</span>
+            <span class="n">l_pos_msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">l_msg_mlp</span><span class="p">(</span><span class="n">l_pos_emb</span><span class="p">)</span>
+            <span class="n">l_neg_msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">l_msg_mlp</span><span class="p">(</span><span class="n">l_neg_emb</span><span class="p">)</span>
+            <span class="n">c_msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_msg_mlp</span><span class="p">(</span><span class="n">c_emb</span><span class="p">)</span>
+
+            <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;pos_l&quot;</span><span class="p">:</span> <span class="n">l_pos_msg</span><span class="p">,</span>
+                <span class="s2">&quot;neg_l&quot;</span><span class="p">:</span> <span class="n">l_neg_msg</span><span class="p">,</span>
+                <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="n">c_msg</span>
+            <span class="p">}</span>
+            <span class="n">conv_emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+            
+            <span class="n">pos_cat_emb</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">conv_emb</span><span class="p">[</span><span class="s2">&quot;pos_l&quot;</span><span class="p">],</span> <span class="n">l_pos_emb</span><span class="p">,</span> <span class="n">l_neg_emb</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">neg_cat_emb</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">conv_emb</span><span class="p">[</span><span class="s2">&quot;neg_l&quot;</span><span class="p">],</span> <span class="n">l_neg_emb</span><span class="p">,</span> <span class="n">l_pos_emb</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">c_cat_emb</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">conv_emb</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">],</span> <span class="n">c_emb</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="n">l_pos_emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">l_update</span><span class="p">(</span><span class="n">pos_cat_emb</span><span class="p">)</span>
+            <span class="n">l_neg_emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">l_update</span><span class="p">(</span><span class="n">neg_cat_emb</span><span class="p">)</span>
+            <span class="n">c_emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_update</span><span class="p">(</span><span class="n">c_cat_emb</span><span class="p">)</span>
+
+        <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;pos_l&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l_pos_emb</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;neg_l&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l_neg_emb</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_emb</span>
+        
+        <span class="k">return</span> <span class="n">batch</span></div>
+
+    
+<div class="viewcode-block" id="GeneralGNN.vcg_forward">
+<a class="viewcode-back" href="../../../../satgl.models.cnf_models.html#satgl.models.cnf_models.gnn.GeneralGNN.vcg_forward">[docs]</a>
+    <span class="k">def</span> <span class="nf">vcg_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">]</span>
+        <span class="n">v_emb</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span>
+        <span class="n">c_emb</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">round_idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_round</span><span class="p">)):</span>
+            <span class="n">v_msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_msg_mlp</span><span class="p">(</span><span class="n">v_emb</span><span class="p">)</span>
+            <span class="n">c_msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_msg_mlp</span><span class="p">(</span><span class="n">c_emb</span><span class="p">)</span>
+
+            <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;v&quot;</span><span class="p">:</span> <span class="n">v_msg</span><span class="p">,</span>
+                <span class="s2">&quot;c&quot;</span><span class="p">:</span> <span class="n">c_msg</span>
+            <span class="p">}</span>
+            <span class="n">conv_emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+            
+            <span class="n">v_cat_emb</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">conv_emb</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">],</span> <span class="n">v_emb</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">c_cat_emb</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">conv_emb</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">],</span> <span class="n">c_emb</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="n">v_emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_update</span><span class="p">(</span><span class="n">v_cat_emb</span><span class="p">)</span>
+            <span class="n">c_emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">c_update</span><span class="p">(</span><span class="n">c_cat_emb</span><span class="p">)</span>
+
+        <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_emb</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;c&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">c_emb</span>
+        
+        <span class="k">return</span> <span class="n">batch</span></div>
+
+    
+<div class="viewcode-block" id="GeneralGNN.lig_forward">
+<a class="viewcode-back" href="../../../../satgl.models.cnf_models.html#satgl.models.cnf_models.gnn.GeneralGNN.lig_forward">[docs]</a>
+    <span class="k">def</span> <span class="nf">lig_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">]</span>
+        <span class="n">l_pos_emb</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;pos_l&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span>
+        <span class="n">l_neg_emb</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;neg_l&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">round_idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_round</span><span class="p">)):</span>
+            <span class="n">l_pos_msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">l_msg_mlp</span><span class="p">(</span><span class="n">l_pos_emb</span><span class="p">)</span>
+            <span class="n">l_neg_msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">l_msg_mlp</span><span class="p">(</span><span class="n">l_neg_emb</span><span class="p">)</span>
+
+            <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;pos_l&quot;</span><span class="p">:</span> <span class="n">l_pos_msg</span><span class="p">,</span>
+                <span class="s2">&quot;neg_l&quot;</span><span class="p">:</span> <span class="n">l_neg_msg</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">conv_emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+            
+            <span class="n">pos_cat_emb</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">conv_emb</span><span class="p">[</span><span class="s2">&quot;pos_l&quot;</span><span class="p">],</span> <span class="n">l_pos_emb</span><span class="p">,</span> <span class="n">l_neg_emb</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">neg_cat_emb</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">conv_emb</span><span class="p">[</span><span class="s2">&quot;neg_l&quot;</span><span class="p">],</span> <span class="n">l_neg_emb</span><span class="p">,</span> <span class="n">l_pos_emb</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="n">l_pos_emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">l_update</span><span class="p">(</span><span class="n">pos_cat_emb</span><span class="p">)</span>
+            <span class="n">l_neg_emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">l_update</span><span class="p">(</span><span class="n">neg_cat_emb</span><span class="p">)</span>
+
+        <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;pos_l&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l_pos_emb</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;neg_l&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">l_neg_emb</span>
+        
+        <span class="k">return</span> <span class="n">batch</span></div>
+
+
+<div class="viewcode-block" id="GeneralGNN.vig_forward">
+<a class="viewcode-back" href="../../../../satgl.models.cnf_models.html#satgl.models.cnf_models.gnn.GeneralGNN.vig_forward">[docs]</a>
+    <span class="k">def</span> <span class="nf">vig_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">batch</span><span class="p">[</span><span class="s2">&quot;g&quot;</span><span class="p">]</span>
+        <span class="n">v_emb</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">round_idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">num_round</span><span class="p">)):</span>
+            <span class="n">v_msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_msg_mlp</span><span class="p">(</span><span class="n">v_emb</span><span class="p">)</span>
+
+            <span class="n">msg</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;v&quot;</span><span class="p">:</span> <span class="n">v_msg</span><span class="p">,</span>
+            <span class="p">}</span>
+            <span class="n">conv_emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv_layer</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">msg</span><span class="p">)</span>
+            
+            <span class="n">v_cat_emb</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">conv_emb</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">],</span> <span class="n">v_emb</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+            <span class="n">v_emb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_update</span><span class="p">(</span><span class="n">v_cat_emb</span><span class="p">)</span>
+
+        <span class="n">g</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="s2">&quot;v&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;emb&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_emb</span>
+        
+        <span class="k">return</span> <span class="n">batch</span></div>
+
+    
+<div class="viewcode-block" id="GeneralGNN.forward">
+<a class="viewcode-back" href="../../../../satgl.models.cnf_models.html#satgl.models.cnf_models.gnn.GeneralGNN.forward">[docs]</a>
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">batch</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="GCN">
+<a class="viewcode-back" href="../../../../satgl.models.cnf_models.html#satgl.models.cnf_models.gnn.GCN">[docs]</a>
+<span class="k">class</span> <span class="nc">GCN</span><span class="p">(</span><span class="n">GeneralGNN</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GCN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+<div class="viewcode-block" id="GCN.set_conv">
+<a class="viewcode-back" href="../../../../satgl.models.cnf_models.html#satgl.models.cnf_models.gnn.GCN.set_conv">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_conv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">GraphConv</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">emb_size</span><span class="p">,</span> <span class="n">allow_zero_in_degree</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+</div>
+
+
+<div class="viewcode-block" id="GIN">
+<a class="viewcode-back" href="../../../../satgl.models.cnf_models.html#satgl.models.cnf_models.gnn.GIN">[docs]</a>
+<span class="k">class</span> <span class="nc">GIN</span><span class="p">(</span><span class="n">GeneralGNN</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">GIN</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+<div class="viewcode-block" id="GIN.set_conv">
+<a class="viewcode-back" href="../../../../satgl.models.cnf_models.html#satgl.models.cnf_models.gnn.GIN.set_conv">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_conv</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">GINConv</span><span class="p">()</span></div>
+</div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">SATGL</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, Clinozoisite.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

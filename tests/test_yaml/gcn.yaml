@@ -1,0 +1,28 @@
+dataset_name: test
+task: satisfiability
+task_type: lcg
+task_level: graph
+
+
+
+model_settings:
+  model: gcn
+  emb_size: 128
+  num_fc: 3
+  num_round: 32
+
+
+# train settings
+valid_metric: accuracy
+epochs: 100
+lr: 5e-5
+weight_decay: 1e-10
+device: cuda:7
+split_ratio: [0.6, 0.2, 0.2]
+batch_size: 32
+save_model: ./save_model/gcn
+
+
+#log settings
+log_file: ./log/gcn.log
+

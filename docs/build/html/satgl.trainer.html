@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+
+<html lang="python" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>satgl.trainer package &#8212; SATGL  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=649a27d8" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinxdoc.css?v=87629129" />
+    <script src="_static/documentation_options.js?v=d048f138"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SATGL  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">satgl.trainer package</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="satgl-trainer-package">
+<h1>satgl.trainer package<a class="headerlink" href="#satgl-trainer-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-satgl.trainer.get_trainer">
+<span id="satgl-trainer-get-trainer-module"></span><h2>satgl.trainer.get_trainer module<a class="headerlink" href="#module-satgl.trainer.get_trainer" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="satgl.trainer.get_trainer.get_trainer">
+<span class="sig-prename descclassname"><span class="pre">satgl.trainer.get_trainer.</span></span><span class="sig-name descname"><span class="pre">get_trainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/trainer/get_trainer.html#get_trainer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.trainer.get_trainer.get_trainer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-satgl.trainer.trainer">
+<span id="satgl-trainer-trainer-module"></span><h2>satgl.trainer.trainer module<a class="headerlink" href="#module-satgl.trainer.trainer" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="satgl.trainer.trainer.Trainer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">satgl.trainer.trainer.</span></span><span class="sig-name descname"><span class="pre">Trainer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cuda'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">early_stopping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eval_step</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epochs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'./save_model'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_decay</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1e-10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_metric</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'loss'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/trainer/trainer.html#Trainer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.trainer.trainer.Trainer" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#satgl.trainer.trainer.Trainer.evaluate" title="satgl.trainer.trainer.Trainer.evaluate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">evaluate</span></code></a>(model, data_loader)</p></td>
+<td><p>Evaluate the model.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#satgl.trainer.trainer.Trainer.train" title="satgl.trainer.trainer.Trainer.train"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train</span></code></a>(model, train_loader[, valid_loader, ...])</p></td>
+<td><p>Train the model on the given dataset.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#satgl.trainer.trainer.Trainer.train_epoch" title="satgl.trainer.trainer.Trainer.train_epoch"><code class="xref py py-obj docutils literal notranslate"><span class="pre">train_epoch</span></code></a>(model, data_loader)</p></td>
+<td><p>Train the model for one epoch.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><strong>set_optimizer</strong></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><strong>set_scheduler</strong></p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.trainer.trainer.Trainer.evaluate">
+<span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="satgl.wrappers.model_wrappers.html#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper" title="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper"><span class="pre">ModelWrapper</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_loader</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GraphDataLoader</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/satgl/trainer/trainer.html#Trainer.evaluate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.trainer.trainer.Trainer.evaluate" title="Link to this definition">¶</a></dt>
+<dd><p>Evaluate the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model</strong><span class="classifier">torch.nn.Module</span></dt><dd><p>The model to evaluate.</p>
+</dd>
+<dt><strong>valid_loader</strong><span class="classifier">GraphDataLoader</span></dt><dd><p>The validation data loader.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>dict</dt><dd><p>The evaluation results.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.trainer.trainer.Trainer.set_optimizer">
+<span class="sig-name descname"><span class="pre">set_optimizer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="satgl.wrappers.model_wrappers.html#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper" title="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper"><span class="pre">ModelWrapper</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/trainer/trainer.html#Trainer.set_optimizer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.trainer.trainer.Trainer.set_optimizer" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.trainer.trainer.Trainer.set_scheduler">
+<span class="sig-name descname"><span class="pre">set_scheduler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optimizer</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optimizer</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/trainer/trainer.html#Trainer.set_scheduler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.trainer.trainer.Trainer.set_scheduler" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.trainer.trainer.Trainer.train">
+<span class="sig-name descname"><span class="pre">train</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="satgl.wrappers.model_wrappers.html#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper" title="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper"><span class="pre">ModelWrapper</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">train_loader</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GraphDataLoader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">valid_loader</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GraphDataLoader</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_loader</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GraphDataLoader</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_best_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/satgl/trainer/trainer.html#Trainer.train"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.trainer.trainer.Trainer.train" title="Link to this definition">¶</a></dt>
+<dd><p>Train the model on the given dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model</strong><span class="classifier">torch.nn.Module</span></dt><dd><p>The model to train.</p>
+</dd>
+<dt><strong>train_loader</strong><span class="classifier">GraphDataLoader</span></dt><dd><p>The train data loader.</p>
+</dd>
+<dt><strong>valid_loader</strong><span class="classifier">GraphDataLoader</span></dt><dd><p>The validation data loader.</p>
+</dd>
+<dt><strong>test_loader</strong><span class="classifier">GraphDataLoader</span></dt><dd><p>The test data loader.</p>
+</dd>
+<dt><strong>use_best_model</strong><span class="classifier">bool</span></dt><dd><p>Whether to use the best model during evaluation.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="satgl.trainer.trainer.Trainer.train_epoch">
+<span class="sig-name descname"><span class="pre">train_epoch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="satgl.wrappers.model_wrappers.html#satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper" title="satgl.wrappers.model_wrappers.base_model_wrapper.ModelWrapper"><span class="pre">ModelWrapper</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_loader</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GraphDataLoader</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/satgl/trainer/trainer.html#Trainer.train_epoch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.trainer.trainer.Trainer.train_epoch" title="Link to this definition">¶</a></dt>
+<dd><p>Train the model for one epoch.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>model</strong><span class="classifier">ModelWrapper</span></dt><dd><p>The model to train.</p>
+</dd>
+<dt><strong>train_loader</strong><span class="classifier">GraphDataLoader</span></dt><dd><p>The train data loader.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="satgl.trainer.trainer.move_to_device">
+<span class="sig-prename descclassname"><span class="pre">satgl.trainer.trainer.</span></span><span class="sig-name descname"><span class="pre">move_to_device</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/satgl/trainer/trainer.html#move_to_device"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#satgl.trainer.trainer.move_to_device" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-satgl.trainer">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-satgl.trainer" title="Link to this heading">¶</a></h2>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">satgl.trainer package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-satgl.trainer.get_trainer">satgl.trainer.get_trainer module</a><ul>
+<li><a class="reference internal" href="#satgl.trainer.get_trainer.get_trainer"><code class="docutils literal notranslate"><span class="pre">get_trainer()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-satgl.trainer.trainer">satgl.trainer.trainer module</a><ul>
+<li><a class="reference internal" href="#satgl.trainer.trainer.Trainer"><code class="docutils literal notranslate"><span class="pre">Trainer</span></code></a><ul>
+<li><a class="reference internal" href="#satgl.trainer.trainer.Trainer.evaluate"><code class="docutils literal notranslate"><span class="pre">Trainer.evaluate()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.trainer.trainer.Trainer.set_optimizer"><code class="docutils literal notranslate"><span class="pre">Trainer.set_optimizer()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.trainer.trainer.Trainer.set_scheduler"><code class="docutils literal notranslate"><span class="pre">Trainer.set_scheduler()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.trainer.trainer.Trainer.train"><code class="docutils literal notranslate"><span class="pre">Trainer.train()</span></code></a></li>
+<li><a class="reference internal" href="#satgl.trainer.trainer.Trainer.train_epoch"><code class="docutils literal notranslate"><span class="pre">Trainer.train_epoch()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#satgl.trainer.trainer.move_to_device"><code class="docutils literal notranslate"><span class="pre">move_to_device()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-satgl.trainer">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/satgl.trainer.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">SATGL  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">satgl.trainer package</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Clinozoisite.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+    </div>
+  </body>
+</html>

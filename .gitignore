@@ -1,0 +1,6 @@
+benchmarks
+init.sh
+**/__pycache__
+**/*.pyc
+**/*.log
+**/*.pth
