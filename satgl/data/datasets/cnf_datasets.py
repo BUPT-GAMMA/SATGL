@@ -87,6 +87,19 @@ class CNFDataset(DGLDataset):
         """
         raise NotImplementedError
     
+    # def __getitem__(self, idx):
+    #     if idx * 2 + 1 < len(self.data_list):
+    #         item = [self.data_list[idx * 2], self.data_list[idx * 2 + 1]]
+    #         random.shuffle(item)
+    #         return item
+    #     elif idx * 2 + 1 == len(self.data_list):
+    #         return [self.data_list[idx * 2]]
+    #     else:
+    #         raise IndexError("Index out of range.")
+
+    # def __len__(self):
+    #     return (len(self.data_list) + 1) // 2
+    
 class SatistifiabilityDataset(CNFDataset):
     r"""
     Satisfiability task class for CNF dataset.
