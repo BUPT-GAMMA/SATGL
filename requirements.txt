@@ -12,7 +12,6 @@ click==8.1.7
 cloudpickle==3.0.0
 cmake==3.29.2
 dask==2024.4.1
-dgl==2.1.0+cu117
 docutils==0.21.1
 exceptiongroup==1.2.0
 filelock==3.13.4
