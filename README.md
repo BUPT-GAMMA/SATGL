@@ -1,6 +1,6 @@
 ## Install
 
-### install python 3.9
+### create python 3.9 environment
 
 ```
 conda create -n python=3.9
@@ -11,6 +11,9 @@ conda create -n python=3.9
 ```
 pip install -r requirements.txt
 ```
+
+### install dgl following https://www.dgl.ai/pages/start.html
+
 
 ### install satgl
 
@@ -28,7 +31,7 @@ run example in the test directory
 python ./label_gen --cnf_dir YOUR_CNF_DIR
 ```
 
-### train
+### a simple example for train
 
 the dataset should be in the format like this
 
@@ -40,7 +43,28 @@ root_dir
 └── label
 ```
 
+```
+import os
+import sys
+import torch
+import torch.nn as nn
 
+from satgl.run_experiment import run_experiment
+from satgl.config.config import Config
+
+if __name__ == "__main__":
+    config_files = ["./test_yaml/neurosat.yaml"]
+    parameter_dict = {
+        "task": "satisfiability",
+        "model": "neurosat",
+        "dataset_path": "../benchmarks/sr",
+    }
+    config = Config(config_files, parameter_dict)
+    run_experiment(config)
+
+```
+
+then run the example 
 
 ```
 python ./neurosat_test.py --dataset_path=YOUR_DATASET_PATH
