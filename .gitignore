@@ -4,3 +4,4 @@ init.sh
 **/*.pyc
 **/*.log
 **/*.pth
+.vscode
