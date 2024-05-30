@@ -26,14 +26,13 @@ supported_models = {
     "nlocalsat": NLocalSAT,
     "querysat": QuerySAT,
     "gcn": GCN,
-    "gin": GIN
+    "gin": GIN,
 }
 
 supported_tasks = {
     "satisfiability": SatisfiabilityModelWrapper,
     "maxsat": MaxSATModelWrapper,
-    "unsat_core": UnSATCoreModelWrapper
-
+    "unsat_core": UnSATCoreModelWrapper,
 }
 
 tasks_default_loss = {
