@@ -1,5 +1,7 @@
 import torch
 
+from sklearn.metrics import roc_auc_score
+
 def accuracy(pred: torch.Tensor, label: torch.Tensor) -> float:
     r"""
     Calculate the accuracy of the model.
@@ -54,6 +56,8 @@ def micro_f1(pred: torch.Tensor, label: torch.Tensor, return_detail=True) -> flo
         return f1, tp, fp, tn, fn
     else:
         return f1
+
+
 
 
 class Evaluator(object):
@@ -154,6 +158,31 @@ class MicroF1(Evaluator):
         self.eval_status["fn"] = (cur_fn_sum + new_fn_sum) / self.eval_status["data_size"]
         self.eval_status["micro_f1"] = (cur_f1_sum + new_f1_sum) / self.eval_status["data_size"]
 
+
+class AUC(Evaluator):
+    def __init__(self):
+        super(AUC, self).__init__(
+            eval_fn=auc,
+            eval_fn_name="auc",
+            compare_type=">",
+        )
+
+    def reset(self):
+        self.eval_status = {
+            "data_size": 0,
+            "auc": 0
+        }
+    
+    def __call__(self, pred, label):
+        auc = self.eval_fn(pred, label)
+        data_size = len(label)
+
+        cur_auc_sum = self.eval_status["auc"] * self.eval_status["data_size"]
+        
+        new_auc_sum = auc * data_size
+        
+        self.eval_status["data_size"] += data_size
+        self.eval_status["auc"] = (cur_auc_sum + new_auc_sum) / self.eval_status["data_size"]
 
 """ 
 dict to store the evaluator for each metric

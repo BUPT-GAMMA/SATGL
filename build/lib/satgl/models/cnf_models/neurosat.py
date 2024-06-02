@@ -74,3 +74,4 @@ class NeuroSAT(nn.Module):
         g.nodes["c"].data["emb"] = c_state[0].squeeze(0)
         
         return batch
+    

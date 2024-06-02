@@ -1,7 +1,8 @@
 from satgl.data.datasets.cnf_datasets import(
     SatistifiabilityDataset,
     MaxSATDataset,
-    UnSATCoreDataset
+    UnSATCoreDataset,
+    MultiTasksDataset
 )
 from satgl.data.dataloaders.cnf_dataloaders import(
     SatistifiabilityDataLoader,

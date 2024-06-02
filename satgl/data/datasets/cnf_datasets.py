@@ -187,3 +187,41 @@ class UnSATCoreDataset(CNFDataset):
 
     def __len__(self):
         return len(self.data_list)
+
+class MultiTasksDataset(CNFDataset):
+    def __init__(self, cnf_dir:str, label_path:str, graph_type:str, tasks:list):
+        self.tasks = tasks
+        super().__init__(cnf_dir, label_path, graph_type)
+
+    def label_process(self, item:any):
+        if isinstance(item, str):
+            return eval(item)
+        else:
+            return float(item)
+
+    def process(self):
+        label_df = pd.read_csv(self.label_path, sep=',')
+        self.data_list = []
+
+        for idx, row in tqdm(label_df.iterrows(), total=label_df.shape[0]):
+            name = row['name']
+            label = [self.label_process(row[task_name]) for task_name in self.tasks]
+            cnf_path = os.path.join(self.cnf_dir, name)
+            num_variable, num_clause, clause_list = parse_cnf_file(cnf_path)
+            cnf_graph = self.build_graph(cnf_path)
+            info = self._get_info(num_variable, num_clause, clause_list)
+            self.data_list.append({"g": cnf_graph, "label": label, "info": info})
+
+    def __getitem__(self, idx):
+        # if the dataset name contains the satisfiability information, the batch will make <sat , unsat> pair
+        if idx  < len(self.data_list) // 2:
+            item = [self.data_list[idx], self.data_list[idx + len(self.data_list) // 2]]
+            random.shuffle(item)
+            return item
+        elif idx * 2 + 1 == len(self.data_list):
+            return [self.data_list[-1]]
+        else:
+            raise IndexError("Index out of range.")
+
+    def __len__(self):
+        return (len(self.data_list) + 1) // 2

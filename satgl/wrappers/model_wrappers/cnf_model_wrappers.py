@@ -2,15 +2,64 @@ import torch
 import dgl
 import torch.nn as nn
 
-from satgl.wrappers.model_wrappers.base_model_wrapper import ModelWrapper
+from satgl.wrappers.model_wrappers.base_model_wrapper import (
+    ModelWrapper,
+    MultitasksModelWrapper
+)
 from satgl.models.layers.mlp import MLP
+from satgl.models.layers.inputs import get_pre_stage
+from satgl.models.layers.readouts import get_post_stage
+
+class MultiTasksCNFModelWrapper(MultitasksModelWrapper):
+    def __init__(
+        self,
+        tasks: list,
+        emb_size: int,
+        graph_type: str,
+        num_fc: int,
+        weights: list,
+        losses: list,
+        evaluators: list,
+        model: nn.Module
+    ) -> None:
+        super(MultiTasksCNFModelWrapper, self).__init__(
+            tasks = tasks,
+            weights = weights,
+            losses = losses,
+            evaluators = evaluators,
+            model = model
+        )
+        self.tasks = tasks
+        self.emb_size = emb_size
+        self.graph_type = graph_type
+        self.num_fc = num_fc
+        self.model = model
+
+        self.pre_stage_model = get_pre_stage(self.emb_size, self.graph_type, self.num_fc)
+        self.post_stage_model = get_post_stage(self.tasks, self.emb_size, self.graph_type, self.num_fc)
+
+    def pre_stage(self, batch:dict) -> dict:
+        return self.pre_stage_model(batch)
+    
+    def post_stage(self, batch:dict) -> dict:
+        return self.post_stage_model(batch)
+    
+    def forward(self, batch:dict) -> dict:
+        batch = self.pre_stage(batch)
+        batch = self.model(batch)
+        batch = self.post_stage(batch)
+        return batch
 
 
 class CNFModelWrapper(ModelWrapper):
+
     def __init__(self, config) -> None:
         super(ModelWrapper, self).__init__()
         self.config = config
+        self.tasks = config["tasks"]
         self.init_pre_stage_networks()
+        self.init_post_stage_network()
+
 
     def init_pre_stage_networks(self):
         emb_size = self.config.model_settings["emb_size"]
@@ -43,6 +92,7 @@ class CNFModelWrapper(ModelWrapper):
 
     def pre_stage(self, batch: dict):
         g = batch["g"]
+        
         if self.config["graph_type"] == "lcg":
             l_emb = self.l_init_mlp(self.l_init_emb)
             c_emb = self.c_init_mlp(self.c_init_emb)
@@ -250,3 +300,4 @@ class UnSATCoreModelWrapper(CNFModelWrapper):
             return self.vcg_post_stage(batch)
         else:
             raise ValueError("Graph type not supported.")
+

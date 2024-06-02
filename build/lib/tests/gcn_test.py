@@ -13,7 +13,7 @@ from satgl.config.config import Config
 if __name__ == "__main__":
     config_files = ["./test_yaml/gcn.yaml"]
     parameter_dict = {
-        "task": "satisfiability",
+        "task": "maxsat",
         "model": "gcn",
         "dataset_path": "../benchmarks/sr",
         "graph_type": "lcg"

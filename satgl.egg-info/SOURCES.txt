@@ -62,4 +62,5 @@ tests/neurocore_test.py
 tests/neurosat_test.py
 tests/nlocalsat_test.py
 tests/querysat_test.py
+tests/satformer_test.py
 tests/sls_solver_test.py
